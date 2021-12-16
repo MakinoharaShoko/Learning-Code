@@ -7,6 +7,6 @@ var name = 'Matt';
 // let age = 26;
 
 // 转换函数
-console.log(typeof Number('123') );//number
-console.log(typeof parseInt('123') );//number
-console.log(typeof parseFloat('123') );//number
+console.log(typeof Number('123'));//number
+console.log(typeof parseInt('123'));//number
+console.log(typeof parseFloat('123'));//number
