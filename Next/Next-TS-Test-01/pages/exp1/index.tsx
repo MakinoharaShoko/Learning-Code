@@ -5,13 +5,13 @@ const Exp1Index = () => {
 	const [testRes,setTestRes] = useState(0);
 	const [count, setCount] = useState(0);
 	return (
-    <div onClick={() => {
+		<div onClick={() => {
 		postTest(setTestRes);
 		setCount(count + 1)
 	}}>
 		TestPost<br/>
 	</div>
-    )；
+		);
 }
 
 function postTest(set:any) {
@@ -20,11 +20,11 @@ function postTest(set:any) {
 	},{
 	headers:{'Content-Type': 'application/x-www-form-urlencoded'}
 	})
-		.then(function (response) {
+		.then(function (response:any) {
 			console.log(response);
 			set(response);
 		})
-		.catch(function (error) {
+		.catch(function (error:any) {
 			console.log(error);
 		});
 }
