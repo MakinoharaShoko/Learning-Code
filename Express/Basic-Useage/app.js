@@ -7,7 +7,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-const Port = 80;
+const Port = 3001;
 process.env.PORT = Port;
 
 app.get('/test1',(req,res)=>{
