@@ -1,3 +1,6 @@
+import {createStore} from "redux";
+
+//初始化
 const defaultStore = {
     inputValue:'Write something',
     list:[
@@ -6,9 +9,8 @@ const defaultStore = {
     ]
 };
 
-export default (state = defaultStore,action)=>{
-    console.log(state);
-    console.log(action);
+const reducer =  (state = defaultStore,action)=>{
+    //判断action的类型，改变state的指定属性
     if(action.type === 'value/changeInput'){
         let newState = JSON.parse(JSON.stringify(state));
         newState.inputValue = action.payload;
@@ -16,3 +18,7 @@ export default (state = defaultStore,action)=>{
     }
     return state;
 }
+
+const appStore = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+export default appStore;
