@@ -1,18 +1,16 @@
 import './App.css';
-import appStore from "./store/appReducer";
+import store from "./store";
 import {useState} from "react";
-import { Input } from 'antd';
+import {Button, Input} from 'antd';
 import 'antd/dist/antd.css';
 
 function App() {
     //初始化HOOK：取出store里的state
-    const [appData,setAppData] = useState(appStore.getState());
+    const [appData,setAppData] = useState(store.getState());
     //当store变动时，调用回调函数（这里是setAppData）
-    appStore.subscribe(()=>{setAppData(appStore.getState())});
+    store.subscribe(()=>{setAppData(store.getState())});
     let list = appData.list;
-    let inputValue = appData.inputValue;
     let page = [];
-    console.log(appStore.getState())
     for (let i = 0; i < list.length; i++) {
         let temp = <div>{list[i]}</div>
         page.push(temp);
@@ -25,16 +23,22 @@ function App() {
             payload:e.target.value
         }
         // 使action生效（也就是传给reducer，判断后更新store中的state）
-        appStore.dispatch(action);
+        store.dispatch(action);
+    }
+
+    const addElementToList = ()=>{
+        const action = {
+            type:'list/addList',
+            payload: appData.inputValue
+        }
+        store.dispatch(action);
     }
 
     return (
         <div>
             <Input placeholder={"Write Something"} onChange={changeInputValue}/>
+            <Button onClick={addElementToList}>Add</Button>
             {page}
-            <div>
-                {inputValue}
-            </div>
         </div>
     );
 }
