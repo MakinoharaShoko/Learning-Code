@@ -12,4 +12,15 @@ const list = (state=defaultStore, action)=>{
     return state;
 }
 
+export class listAction{
+    static addListElement = (newElement) =>{
+        return {
+            type:'list/addList',
+            payload:newElement
+        }
+    }
+}
+
+
+
 export default list;

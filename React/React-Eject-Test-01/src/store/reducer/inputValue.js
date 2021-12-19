@@ -11,4 +11,13 @@ const inputValue =  (state = defaultStore, action)=>{
     return state;
 }
 
+export class inputValueAction{
+    static changeInput = (input) =>{
+        return {
+            type:'value/changeInput',
+            payload:input
+        }
+    }
+}
+
 export default inputValue;

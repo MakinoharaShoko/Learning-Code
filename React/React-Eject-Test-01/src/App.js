@@ -3,6 +3,8 @@ import store from "./store";
 import {useState} from "react";
 import {Button, Input} from 'antd';
 import 'antd/dist/antd.css';
+import {listAction} from "./store/reducer/list";
+import {inputValueAction} from "./store/reducer/inputValue";
 
 function App() {
     //初始化HOOK：取出store里的state
@@ -18,19 +20,13 @@ function App() {
 
     const changeInputValue = (e)=>{
         // 创建action
-        const action = {
-            type:'value/changeInput',
-            payload:e.target.value
-        }
+        const action = inputValueAction.changeInput(e.target.value)
         // 使action生效（也就是传给reducer，判断后更新store中的state）
         store.dispatch(action);
     }
 
     const addElementToList = ()=>{
-        const action = {
-            type:'list/addList',
-            payload: appData.inputValue
-        }
+        const action = listAction.addListElement(appData.inputValue)
         store.dispatch(action);
     }
 
