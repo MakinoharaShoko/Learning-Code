@@ -43,3 +43,13 @@ switch (true){
         console.log('a>=0');
         break;
 }//输出 a>=0
+
+const b = -3;
+switch(true){
+    case b<0:
+        console.log('b<0');
+        break;
+    case b>=0:
+        console.log('b>=0');
+        break;
+}//输出b<0
