@@ -40,4 +40,4 @@ for (let i = 0; i < 10; i++) {
     store.set('value', i);
 }
 
-// export default flyVar;
+module.exports = flyVar;
