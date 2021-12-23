@@ -34,10 +34,4 @@ class flyVar {
     }
 }
 
-const store = new flyVar;
-store.connect('value2', () => { console.log(store.get('value')); })
-for (let i = 0; i < 10; i++) {
-    store.set('value', i);
-}
-
 module.exports = flyVar;
