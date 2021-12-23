@@ -5291,6 +5291,11 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
+flyvar@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/flyvar/-/flyvar-1.0.5.tgz#dd08abbdb4a505956d041312641cd1a02046160b"
+  integrity sha512-XT/cyNsgUx+jAjFcWVSzoNvMdlmPgmhA9e66WcZAT8lABhjVH54jYAh0jxf9646blfUG9+XoRSdQitzL5E/fqg==
+
 follow-redirects@^1.0.0:
   version "1.14.6"
   resolved "https://registry.npmmirror.com/follow-redirects/download/follow-redirects-1.14.6.tgz#8cfb281bbc035b3c067d6cd975b0f6ade6e855cd"
