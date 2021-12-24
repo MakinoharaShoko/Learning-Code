@@ -5291,10 +5291,10 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-flyvar@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.npmjs.org/flyvar/-/flyvar-1.0.6.tgz#269b75ac70dcb15e0e9ae79d034954728f20e8ef"
-  integrity sha512-HuEcB0rDJM1YmbVzJaE95udzayKyq6ycyYun80K2MGDnceDCwjshNmBwR2z+X3kqfSQbUUb+KcPjnuSrFzncWg==
+flyvar@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/flyvar/-/flyvar-1.0.7.tgz#ef60e00646526ae5296ada5a8019fd21677ab432"
+  integrity sha512-cEk8FltHwQ62yuStAF5L2LzWTBbnQZswhK6Q5jsgowv5An6GjCUxlSmqI9ycx/hBsynpPPzx1+ul28uaDq5LKw==
 
 follow-redirects@^1.0.0:
   version "1.14.6"
