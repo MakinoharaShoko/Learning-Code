@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AniScroll from "./controller/animationController";
+import AniScroll from "aniscroll";
 
 ReactDOM.render(
     <React.StrictMode>
