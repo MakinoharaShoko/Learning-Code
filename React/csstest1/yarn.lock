@@ -2147,10 +2147,10 @@ alphanum-sort@^1.0.2:
   resolved "https://registry.npmmirror.com/alphanum-sort/download/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
-aniscroll@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/aniscroll/-/aniscroll-1.0.0.tgz#dbd00a265056af74d88a6f9a653d29a59c466ff7"
-  integrity sha512-nGImgAwDrppWwVBo9z2nCqHfxtVrlBIyP2MGNocMbSMd8m7cYf1mHhi/nQVDFqUsX3oPA/QjGGaJW7DiwHbwSQ==
+aniscroll@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/aniscroll/-/aniscroll-1.0.3.tgz#f9c8006473767cd467eea761522673a7f66948a7"
+  integrity sha512-UY4TovrOJgI8YtB+wAeKhMeTC0ix5gfWvf1mVDr3AfZRdO2XWZx7GBL7+RD2d/+JTcY2h+aRskVK4bHIGkcGVw==
 
 ansi-colors@^4.1.1:
   version "4.1.1"

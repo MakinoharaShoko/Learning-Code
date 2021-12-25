@@ -19,6 +19,14 @@ const TestAni = ()=>{
                 总有一天，你也能找到喜欢你的虫。
             </div>
         </div>
+        <div id={"testElement3"} style={{position:'absolute',left:'100%',zIndex:'1'}}>
+            <img src={'/img/k3.png'} style={{height:'100vh'}}/>
+        </div>
+        <div id={"testElement4"} style={{position:'absolute',left:'100%',top:'60vh',zIndex:'2'}}>
+            <div style={style1}>
+                メンカタカラメヤサイダブルニンニクアブラマシマシ
+            </div>
+        </div>
     </div>
 
 
