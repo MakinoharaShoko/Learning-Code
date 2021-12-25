@@ -21,5 +21,5 @@ function setAni(){
     let ani = new AniScroll();
     ani.init(500);
     ani.addElementController('testElement1', 0, 0.7);
-    ani.addElementController('testElement2', 800, 1.1);
+    ani.addElementController('testElement2', 600, 1);
 }

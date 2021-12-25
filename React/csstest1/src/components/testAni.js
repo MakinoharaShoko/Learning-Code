@@ -10,11 +10,11 @@ const TestAni = ()=>{
         backgroundColor:'white',
     }
 
-    return <div style={{overflow:'hidden'}}>
-        <div id={"testElement1"} style={{position:'absolute',left:'100%'}}>
-            <img src={'/img/testFigure03.png'} style={{height:'95vh'}}/>
+    return <div style={{overflow:'hidden',position:'relative',width:'100vw',height:'100vh'}}>
+        <div id={"testElement1"} style={{position:'absolute',left:'100%',zIndex:'1'}}>
+            <img src={'/img/testFigure03.png'} style={{height:'100vh'}}/>
         </div>
-        <div id={"testElement2"} style={{position:'absolute',left:'100%'}}>
+        <div id={"testElement2"} style={{position:'absolute',left:'100%',top:'60vh',zIndex:'2'}}>
             <div style={style1}>
                 总有一天，你也能找到喜欢你的虫。
             </div>
