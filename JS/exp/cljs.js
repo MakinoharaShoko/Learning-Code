@@ -32,5 +32,6 @@ logger.init('https://cl.msfasr.com/','mongodb+srv://Kamome:Makinohara31415@ics-m
 
 
 
-
-logger.info('开始调试');
+logger.setCollection('test');
+logger.setLevel('DEBUG');
+logger.debug('测试数据展示',{name:'田所浩二',id:'114514'});
