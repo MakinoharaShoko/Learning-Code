@@ -10,9 +10,9 @@ axios@^0.24.0:
     follow-redirects "^1.14.4"
 
 cloudlogjs@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/cloudlogjs/-/cloudlogjs-1.0.0.tgz#48d1bfe34fc032c822c4314cb65b00f9c14efc05"
-  integrity sha512-/fF8oUvpp9mbdljiH+3IEMcV23Ul8wy9UJDd+6AVpmLSPIrCGcMOWp6m40gDCd0XwsF57yv7q8qeYbvoQyBN8A==
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/cloudlogjs/-/cloudlogjs-1.0.3.tgz#6f41415fec0c790acda4dab40dc74c9e8751068a"
+  integrity sha512-Qbc28lua0iIvDWa0C7xIs3dUuZI7b9xblXHXmJYV+MZqm22zq3d9wfLQrfVmN88izVdOI14egQAomF88PxIq5A==
   dependencies:
     axios "^0.24.0"
 
