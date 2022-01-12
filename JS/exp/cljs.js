@@ -1,38 +1,6 @@
 const cljs = require('cloudlogjs');
 
 const logger = new cljs();
-logger.init('https://cl.msfasr.com/',
-    'mongodb+srv://makinohara:mongo-123456@master.svnck.mongodb.net/myFirstDatabase?retryWrites=true&w=majority	')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-logger.setCollection('test');
+logger.init('http://localhost:3001')
 logger.setLevel('DEBUG');
-logger.fatal('要是系统崩溃了的话，运维生涯就结束了罢');
+logger.info('私，下北泽程序员先辈。24岁，事码农');
