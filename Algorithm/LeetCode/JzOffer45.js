@@ -1,0 +1,1 @@
+const minNumber = nums => nums.sort((a, b) => parseInt('' + a + b) - parseInt('' + b + a)).reduce((a, c) => '' + a + c).toString();
