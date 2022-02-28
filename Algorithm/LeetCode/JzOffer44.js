@@ -1,22 +1,17 @@
-    /**
-     * @param {number} n
-     * @return {number}
-     */
-    var findNthDigit = function (n) {
-        let currentLength = 0;
-        let currentString = '';
-        let addLen = 0;
-        for (let i = 0; ; i++) {
-            //当前长度不够，延长长度
-            if (currentLength <= n) {
-                currentLength = currentLength + i.toString().length;
-                currentString = i.toString();
-                addLen = i.toString().length;
-            } else {
-                const index = n + addLen - currentLength
-                return currentString[index];
-            }
-        }
-    };
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var findNthDigit = function (n) {
+    let fenceWidth = 1;//间隔宽度
+    //数字的长度 = fenceWidth*10**fenceWidth;
+    while (fenceWidth * 10 ** fenceWidth < n) {
+        n = n + 10 ** fenceWidth;//由于添加数位，n被移动了 10**fenceWidth 位
+        fenceWidth++;
+    }
+    //找指定位置的那个间隔的数字
+    const num = Math.floor(n / fenceWidth).toString();//n / fenceWidth 代表指定数字
+    return num[n % fenceWidth];//找出n落在那个数字的第几位，能整除代表在第0位
+};
 
 console.log(findNthDigit(1000000000));
