@@ -11,6 +11,7 @@ var findNthDigit = function (n) {
     }
     //找指定位置的那个间隔的数字
     const num = Math.floor(n / fenceWidth).toString();//n / fenceWidth 代表指定数字
+    //因为每个数字都被补到了fenceWidth 位，所以数字本身当然是 n / fenceWidth
     return num[n % fenceWidth];//找出n落在那个数字的第几位，能整除代表在第0位
 };
 
