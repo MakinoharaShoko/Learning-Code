@@ -7,11 +7,11 @@ var singleNumbers = function (nums) {
     //先找到 x^y 
     let xXORy = 0;
     for (e of nums) {
-        xXORy = e ^ xXORy;
+        xXORy = xXORy ^ e;
     }
     //循环左移找到不同的那一位
     let t = 1;
-    while (xXORy & t === 0) {
+    while ((xXORy & t) === 0) {
         t = t << 1;
     }
     let a = 0, b = 0;
