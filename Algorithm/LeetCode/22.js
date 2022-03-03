@@ -22,7 +22,7 @@ var generateParenthesis = function (n) {
         }
 
     }
-    gentrate(n, n, t);
+    gentrate(n, n, t);//分别代表左括号剩余数量，右括号剩余数量，当前字符串
     return res;
 };
 
