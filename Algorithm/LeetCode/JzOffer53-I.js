@@ -4,17 +4,47 @@
  * @return {number}
  */
 var search = function (nums, target) {
-    //哈希，不对，后面改成二分
-    const m = new Map();
-    for (e of nums) {
-        if (e > target) {
+    //二分
+    let l = 0, r = nums.length - 1;
+    let res = -1;
+    while (l <= r) {
+        let mid = l + parseInt((r - l) / 2);
+        if (nums[mid] === target) {
+            res = mid;
             break;
         }
-        if (m.has(e)) {
-            m.set(e, m.get(e) + 1);
-        } else {
-            m.set(e, 1);
+        if (nums[mid] > target) {
+            r = mid - 1;
+        }
+        if (nums[mid] < target) {
+            l = mid + 1;
         }
     }
-    return m.get(target) ? m.get(target) : 0;
+    let sum = 1;
+    if (res === -1) {
+        return 0;
+    } else {
+        //左右找
+        let l = res - 1;
+        let r = res + 1;
+        while (l >= 0) {
+            if (nums[l] === target) {
+                sum++;
+            } else {
+                break;
+            }
+            l--;
+        }
+        while (r < nums.length) {
+            if (nums[r] === target) {
+                sum++;
+            } else {
+                break;
+            }
+            r++;
+        }
+    }
+    return sum;
 };
+
+console.log(search([5, 7, 7, 8, 8, 10], 8));
