@@ -10,10 +10,10 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
-    if (head === null || head.next === null) {
+    if (head === null || head.next === null) { //没有后继
         return head;
     }
-    const ret = reverseList(head.next);
+    const ret = reverseList(head.next); //反转后的头
     head.next.next = head;
     head.next = null;
     return ret;
