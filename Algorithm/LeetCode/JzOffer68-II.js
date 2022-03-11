@@ -15,7 +15,7 @@ var lowestCommonAncestor = function (root, p, q) {
     const findChild = (node) => {
         if (!node)
             return null;
-        if (node.val === p || node.val === q) {
+        if (node === p || node === q) {
             return node;
         }
         let left = findChild(node.left);
