@@ -1,22 +1,37 @@
 let maxPerformTime = 0;//最大演出时间
 let auto = false;//自动状态
 let isPerforming = false;//“正在演出”标记
-let autoTimeout;
+let isDelaying = false;//“正在延时”标记
+let autoTimeout;//自动延时
+let autoInterval;//自动定时器
 let autoDelay = 500;
 let currentSentenceID = 1;
+
+const switchAutoNext = ()=>{
+    if(auto){
+        clearInterval(autoInterval);
+        auto = false;
+    }else{
+        clearInterval(autoInterval);
+        auto = true;
+        autoInterval = setInterval(()=>{
+            if(!isPerforming&&!isDelaying){
+                next();
+            }
+        },100)
+    }
+}
 
 //用户点击对话框或者屏幕
 const clickNext = () => {
     if (isPerforming) {
-        //TODO:清空所有动画，直接进入终态
+        //TODO:清空所有动画，直接进入终态，但是在等待delay后再设置演出结束（防止在点击后自动立刻进入下一句）
         isPerforming = false;
-        clearTimeout(autoTimeout);//清除原来的计时器（因为演出已经中断了）
-        if (auto) {
-            autoTimeout = setTimeout(() => {
-                next();
-            }, autoDelay);
-        }
-    } else {
+        setTimeout(()=>{
+            isDelaying = false;
+        },autoDelay)
+    } 
+    else {
         next();
     }
 }
@@ -33,6 +48,7 @@ const next = () => {
         next();
     } else {//不是next，此时等待一个最大演出时间，演出结束后触发auto来自动或者什么也不做
         waitForPerformEnd(maxPerformTime);
+        maxPerformTime = 0;//重置最大演出时间
     }
 }
 
@@ -53,14 +69,8 @@ function scriptRunner(sentenceID) {
 
 function waitForPerformEnd(time) {
     clearTimeout(autoTimeout);
+    //演出结束+delay后，设置演出状态为false，这样就可以auto。
     autoTimeout = setTimeout(() => {
-        if (auto) {
-            isPerforming = false;
-            //等待一段时间后进入下一句
-            clearTimeout(autoTimeout);
-            autoTimeout = setTimeout(() => {
-                next();
-            }, autoDelay);
-        }
-    }, time)
+        isPerforming = false;
+    }, time + autoDelay)
 }
