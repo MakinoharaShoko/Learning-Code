@@ -15,6 +15,8 @@ const clickNext = ()=>{
                 next();
             },autoDelay);
         }
+    }else{
+        next();
     }
 }
 
