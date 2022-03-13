@@ -7179,6 +7179,11 @@ resolve@^2.0.0-next.3:
     is-core-module "^2.2.0"
     path-parse "^1.0.6"
 
+reto@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.npmmirror.com/reto/-/reto-0.9.3.tgz#f2fcadd2dcba2758669e31b42054b83f16a05b1f"
+  integrity sha512-ZitG8NhAqenEdTtGYxz8eZdgBwyVre0XUXi9pXKPY5b7vCjOrSrIMkaXXIcWOlZZovkFBy0YSupBzSEryASsVw==
+
 retry@^0.13.1:
   version "0.13.1"
   resolved "https://registry.npmmirror.com/retry/download/retry-0.13.1.tgz#185b1587acf67919d63b357349e03537b2484658"
