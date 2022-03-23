@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 const Port = 3001;
-app.use('/', express.static(__dirname + '/public'));//allow browser access resources
+app.use('/', express.static('./public'));//allow browser access resources
 process.env.PORT = Port;
 
 app.get('/test', (req, res) => {
