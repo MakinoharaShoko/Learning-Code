@@ -1,12 +1,12 @@
 import './App.css';
-import {Button} from "antd";
+import {Main} from "./Components/Main";
 
 function App() {
-  return (
-    <div className="App">
-        Ready for coding!
-    </div>
-  );
+    return (
+        <div className="App">
+            <Main/>
+        </div>
+    );
 }
 
 export default App;
