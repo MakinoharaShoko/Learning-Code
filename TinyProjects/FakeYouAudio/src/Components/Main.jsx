@@ -19,20 +19,20 @@ const ttz = [0, 0];
 
 export const Main = () => {
     const list = [
-        ['《老男孩》筷子兄弟.mp3', 1.12441],
-        ['《ありがとう》大桥卓弥.mp3', 1.52512],
-        ['《在人间》.mp3', 43.43143],
-        ['《What are words》.mp3', 43.12314],
-        ['《最初的梦想》.mp3', 11.45142],
-        ['《银の龙の背に乗って》 中岛美雪.mp3', 11.73431],
-        ['《我的一个道姑朋友》.mp3', 18.33241],
-        ['《一番星》.mp3', 18.02312],
-        ['《时间煮雨》.mp3', 6.32132],
-        ['《等一个晴天》.mp3', 5.99431],
-        ['《出山》.mp3', 21.01311],
-        ['《Super love》.mp3', 20.89887],
-        ['《白月光与朱砂痣》.mp3', 31.43132],
-        ['《夕阳坂》.mp3', 31.00123],
+        ['觉悟 - 袁姗姗.mp3', 1.12441],
+        ['思慕 - 郁可唯.mp3', 1.52512],
+        ['在人间 - 常石磊.mp3', 43.43143],
+        ['What Are Words - Chris Medina.mp3', 43.12314],
+        ['最初的梦想 - 范玮琪.mp3', 11.45142],
+        ['銀の龍の背に乗って - 中岛美雪.mp3', 11.73431],
+        // ['《我的一个道姑朋友》.mp3', 18.33241],
+        // ['《一番星》.mp3', 18.02312],
+        // ['《时间煮雨》.mp3', 6.32132],
+        // ['《等一个晴天》.mp3', 5.99431],
+        // ['《出山》.mp3', 21.01311],
+        // ['《Super love》.mp3', 20.89887],
+        // ['《白月光与朱砂痣》.mp3', 31.43132],
+        // ['《夕阳坂》.mp3', 31.00123],
     ]
     const getTzz = (s) => {
         let tzz = 1.000000;
@@ -49,6 +49,8 @@ export const Main = () => {
     const [tzz1, setTzz1] = useState(0);
     const [tzz2, setTzz2] = useState(0);
     const [xsd, setXsd] = useState('');
+    const [yp1, setYp1] = useState('');
+    const [yp2, setYp2] = useState('');
 
     const props1 = {
         name: 'file',
@@ -61,6 +63,12 @@ export const Main = () => {
             console.log(1);
             console.log(info);
             setName1(info.file.name);
+            setYp1(<audio
+                controls
+                src={"./testFile/" + info.file.name}>
+                Your browser does not support the
+                <code>audio</code> element.
+            </audio>)
             setTzz1(<Tag icon={<SyncOutlined spin/>} color="processing">
                 processing
             </Tag>);
@@ -93,6 +101,12 @@ export const Main = () => {
             console.log(2);
             console.log(info)
             setName2(info.file.name);
+            setYp2(<audio
+                controls
+                src={"./testFile/" + info.file.name}>
+                Your browser does not support the
+                <code>audio</code> element.
+            </audio>)
             setTzz2(<Tag icon={<SyncOutlined spin/>} color="processing">
                 processing
             </Tag>);
@@ -137,6 +151,9 @@ export const Main = () => {
                                 <Descriptions.Item label="名称">
                                     {name1}
                                 </Descriptions.Item>
+                                <Descriptions.Item label="试听">
+                                    {yp1}
+                                </Descriptions.Item>
                                 <Descriptions.Item label="特征值">
                                     {tzz1}
                                 </Descriptions.Item>
@@ -152,6 +169,9 @@ export const Main = () => {
                                 </Descriptions.Item>
                                 <Descriptions.Item label="名称">
                                     {name2}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="试听">
+                                    {yp2}
                                 </Descriptions.Item>
                                 <Descriptions.Item label="特征值">
                                     {tzz2}
