@@ -13,14 +13,14 @@ var searchRange = function (nums, target) {
     let [res1, res2] = [-1, -1];
     let mid;
     while (l <= r) {
-        mid = l + Math.floor((r - l) / 2);
+        mid = l + ((r - l) >> 1);
         if (nums[mid] === target) {
             //二分找到index 和 lastIndex
             //现在找index
             let mid1;
             let [l1, r1] = [0, mid];
             while (l1 <= r) {
-                mid1 = l1 + Math.floor((r1 - l1) / 2);
+                mid1 = l1 + ((r1 - l1) >> 1);
                 if (nums[mid1] === target && nums[mid1 - 1] !== target) {
                     res1 = mid1;
                     break;
@@ -36,7 +36,7 @@ var searchRange = function (nums, target) {
             //现在找lastIndex
             [l1, r1] = [mid, nums.length - 1];
             while (l1 <= r) {
-                mid1 = l1 + Math.floor((r1 - l1) / 2);
+                mid1 = l1 + ((r1 - l1) >> 1);
                 if (nums[mid1] === target && nums[mid1 + 1] !== target) {
                     res2 = mid1;
                     break;
