@@ -1,14 +1,16 @@
-import { useStore } from 'reto'
-import stage from '../../store/stage'
 import styles from './mainWindow.module.scss'
+import {useState} from "react";
 
 const MainWindow = (props) => {
+    const [count, setCount] = useState(0);
     return <div className={styles.title}>
-    <div className={styles.sl}>
-        <div className={styles.element}>1</div>
-        <div className={styles.element}>2</div>
-        <div className={styles.element}>3</div>
-    </div>
+        <div className={styles.sl}>
+            <div>
+                {count}
+            </div>
+            <button onClick={() => setTimeout(() => setCount(count => count + 1), 1000)}>increase</button>
+            <button onClick={() => setTimeout(() => setCount(count => count - 1), 1000)}>desend</button>
+        </div>
     </div>
 }
 
