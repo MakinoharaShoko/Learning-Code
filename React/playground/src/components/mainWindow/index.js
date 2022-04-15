@@ -1,16 +1,41 @@
 import styles from './mainWindow.module.scss'
-import {useState} from "react";
+import {
+    useRecoilState,
+} from 'recoil';
+import { testList } from '../../store/recoliTest';
+import * as __ from 'lodash';
+
+const setByOtherFunc = ()=>{
+    const [list, setList] = useRecoilState(testList);
+    setList(state => {
+        return{...state,list:state.list.concat(1)}
+    });
+    setList(state => {
+        return{...state,list:state.list.concat(2)}
+    });
+}
 
 const MainWindow = (props) => {
-    const [count, setCount] = useState(0);
+
+    const [list, setList] = useRecoilState(testList);
+    console.log(list.list);
+    const showList = list.list.map((e, i) => {
+        return <div key={'list' + i}>{e}</div>
+    })
+    const addTwo = () => {
+        setList(state => {
+            return{...state,list:state.list.concat(1)}
+        });
+        setList(state => {
+            return{...state,list:state.list.concat(2)}
+        });
+    }
+
     return <div className={styles.title}>
         <div className={styles.sl}>
-            <div>
-                {count}
-            </div>
-            <button onClick={() => setTimeout(() => setCount(count => count + 1), 1000)}>increase</button>
-            <button onClick={() => setTimeout(() => setCount(count => count - 1), 1000)}>desend</button>
+            {showList}
         </div>
+        <div onClick={addTwo}>addTwo</div>
     </div>
 }
 
