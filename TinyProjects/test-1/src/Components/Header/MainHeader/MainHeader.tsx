@@ -1,6 +1,10 @@
 import styles from './mainHeader.module.scss'
 import {MainHeaderButton} from "./MainHeaderButton/MainHeaderButton";
 
+/**
+ * 主顶栏
+ * @constructor
+ */
 export const MainHeader = ()=>{
     return <div className={styles.mainHeader}>
         <MainHeaderButton isActive={true}>

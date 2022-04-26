@@ -4,6 +4,11 @@ import styles from './equipments.module.scss'
 import {EquipElement} from "./EquipElement/EquipElement";
 import {ChooseBasicEquipPanel} from "./ChooseBasicEquipPanel/ChooseBasicEquipPanel";
 
+
+/**
+ * 装备查看界面
+ * @constructor
+ */
 export const Equipments = () => {
     /**
      * 选择面板的选项（为方便后期拓展，使用数组描述）
@@ -14,7 +19,8 @@ export const Equipments = () => {
     ]
 
     /**
-     * 获取装备信息
+     * 获取装备信息，由于数据量小，不需要性能优化。
+     * 如果数据量大的优化方案： 使用虚拟列表、将数据处理放到工作者线程。
      */
     useEffect(() => {
         fetch('https://game.gtimg.cn/images/jk/jkimg/test/e.json')
@@ -48,7 +54,7 @@ export const Equipments = () => {
     }
 
     /**
-     * 生成特殊装备的列表
+     * 如果选择的是特殊装备标签，生成特殊装备的列表
      */
     if (panelIndex === 1) {
         filtedData = equipData.filter(e => e['t'] === '特殊装备');
