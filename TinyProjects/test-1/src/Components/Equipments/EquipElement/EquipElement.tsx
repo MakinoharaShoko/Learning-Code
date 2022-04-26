@@ -9,8 +9,9 @@ interface IEquipElement {
 
 export const EquipElement = (props: IEquipElement) => {
     return <div className={styles.equipElementMain}>
-        <div className={styles.equipPic}>
-            <img className={styles.equipPic} src={props.pic} alt={props.name + '图片'}/>
+        <div style={{
+            backgroundImage:`url(${props.pic})`
+        }} className={styles.equipPic}>
         </div>
         <div className={styles.equipDescMain}>
             <div className={styles.equipName}>

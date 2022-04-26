@@ -1,0 +1,27 @@
+.chooseBasicEquipMain {
+  display: flex;
+  align-items: center;
+  margin: 6px 6px 6px 6px;
+  padding: 10px 10px 10px 10px;
+  overflow: scroll;
+}
+
+.pic {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  margin: 0 6px 0 0;
+  outline: 1px solid #83A2BE;
+  background-size: 30px 30px;
+  transition: outline 0.3s;
+  flex-shrink: 0;
+}
+
+.pic:last-child {
+  margin: 0 0 0 0;
+}
+
+.pic_onSelect {
+  outline: 3px solid #57abf6;
+}

@@ -12,6 +12,8 @@
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-size: cover;
+  flex-shrink: 0;
 }
 
 .equipDescMain {
@@ -21,7 +23,7 @@
 .equipName {
   color: #1c1c1c;
   font-size: 14px;
-  padding: 0 0 17px 0;
+  padding: 6px 0 17px 0;
 }
 
 .equipEffectTitle {
