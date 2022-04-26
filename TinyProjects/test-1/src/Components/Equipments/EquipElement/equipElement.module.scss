@@ -1,0 +1,36 @@
+.equipElementMain {
+  padding: 14px 16px 14px 16px;
+  display: flex;
+  border-bottom: 8px solid #F0F3F7;
+}
+
+.equipElementMain:last-child {
+  border-bottom: none;
+}
+
+.equipPic {
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+}
+
+.equipDescMain {
+  padding: 0 0 0 10px;
+}
+
+.equipName {
+  color: #1c1c1c;
+  font-size: 14px;
+  padding: 0 0 17px 0;
+}
+
+.equipEffectTitle {
+  font-size: 12px;
+  color: #1c1c1c;
+}
+
+.desc {
+  font-size: 12px;
+  color: #747475;
+  padding: 3px 0 0 0;
+}
