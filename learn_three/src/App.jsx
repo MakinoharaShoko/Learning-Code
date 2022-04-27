@@ -1,10 +1,10 @@
 import './App.css'
-import {createThree} from "./three/learn_three";
+import {createThree_box} from "./three/create_three_box";
 import {useEffect} from "react";
 
 function App() {
     useEffect(() => {
-        createThree();
+        createThree_box();
     }, [])
     return (
         <div className="App"/>
