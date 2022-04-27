@@ -1,6 +1,6 @@
 import './App.css'
-import {useEffect} from "@types/react";
 import {createThree} from "./three/learn_three";
+import {useEffect} from "react";
 
 function App() {
     useEffect(() => {
