@@ -9,5 +9,9 @@ type Person3 = {
 
 type MakePropertyPartical<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
-const obj: Person2 = { name: 'test' };
+const obj: Person2 = {
+    name: 'test'
+};
+
 const obj2 = { age: 1 };
+console.log(123);
