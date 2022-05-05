@@ -1,3 +1,4 @@
 fn main() {
-    println!("{},{}",1,2);
+    let a:i32 = 1;
+    println!("{},{}",a,2);
 }
