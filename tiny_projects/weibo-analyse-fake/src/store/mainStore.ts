@@ -9,7 +9,8 @@ export interface IPost {
 }
 
 export interface IStore {
-  postList: Array<IPost>
+  postList: Array<IPost>,
+  showCount: number
 }
 
 interface IAction {
@@ -54,12 +55,16 @@ const defaultStore: IStore = {
       url: 'https://weibo.com/2803301701/LrSbj58Wc',
       tag: '人民日报的微博视频'
     },
-  ]
+  ],
+  showCount: 1
 };
 
 
 const mainReducer = (state = defaultStore, action: IAction) => {
   switch (action.type) {
+    case 'ADD_COUNT':
+      const newCount = state.showCount + 1;
+      return {...state, showCount: newCount};
   }
   return state;
 }
