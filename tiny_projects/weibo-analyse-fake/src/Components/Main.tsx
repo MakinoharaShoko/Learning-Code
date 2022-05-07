@@ -26,7 +26,7 @@ const Main = (props: IProps) => {
     }
   });
 
-  const postList = props.postList.map(e => (
+  let postList = props.postList.map(e => (
     <div className={styles.post_element}>
       <div className={styles.post_author}>
         微博用户 @{e.author}
@@ -47,6 +47,8 @@ const Main = (props: IProps) => {
       </div>
     </div>
   ))
+
+  postList = postList.slice(0, props.count);
 
   return <div className={styles.main}>
     <div className={styles.main_leftPanel}>

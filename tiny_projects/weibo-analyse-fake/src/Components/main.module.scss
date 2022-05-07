@@ -48,6 +48,7 @@
   background-color: rgba(242, 244, 246, 1);
   margin: 10px 0 0 0;
   border-radius: 0 7px 7px 7px;
+  animation: ss 1.5s;
 }
 
 .post_author {
@@ -83,4 +84,13 @@
 a {
   color: white;
   text-decoration: none;
+}
+
+@keyframes ss {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
