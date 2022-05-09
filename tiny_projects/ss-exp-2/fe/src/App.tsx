@@ -1,7 +1,7 @@
 import './App.css';
 import {useState} from "react";
 import {Table, Tag, Space} from 'antd';
-import {Form, Input, Button, Checkbox} from 'antd';
+import {Form, Input, Button, Checkbox, message} from 'antd';
 import 'antd/dist/antd.css';
 import axios from "axios";
 
@@ -50,13 +50,13 @@ function App() {
       .then(res => {
         const data = res.data;
         console.log(data);
-        if (data.state === 'error') {
-          alert('用户名或密码错误');
-          location.reload();
-        }
         if (data.state === 'OK') {
           setLoginState(true);
           setData(data.data);
+        }
+        if (data.state === 'error') {
+          message.error('用户名或密码错误').then(r => {
+          });
         }
       }).catch(err => {
       console.log(err)
