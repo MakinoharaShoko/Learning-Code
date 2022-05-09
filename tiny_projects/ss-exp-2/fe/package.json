@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host=3000",
+    "dev": "vite --host=3001",
     "build": "tsc && vite build --base=./",
     "preview": "vite preview"
   },
   "dependencies": {
+    "antd": "^4.20.3",
     "axios": "^0.27.2",
     "cloudlogjs": "^1.0.11",
     "react": "^18.0.0",
