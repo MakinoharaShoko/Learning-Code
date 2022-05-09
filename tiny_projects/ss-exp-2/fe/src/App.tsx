@@ -52,6 +52,7 @@ function App() {
         console.log(data);
         if (data.state === 'error') {
           alert('用户名或密码错误');
+          location.reload();
         }
         if (data.state === 'OK') {
           setLoginState(true);
