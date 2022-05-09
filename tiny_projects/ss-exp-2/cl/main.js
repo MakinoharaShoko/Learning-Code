@@ -21,8 +21,8 @@ app.whenReady().then(() => {
  */
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 1600,
-        height: 900
+        width: 800,
+        height: 600
     })
 
     win.loadFile('./public/index.html').then(r => console.log(r));
