@@ -5,15 +5,18 @@ $tm: 5px 10px 5px 10px;
 .element {
   padding: $tp;
   background-color: #7DB9DE;
+  border: 1px solid black;
 }
 
 .elementHead {
   padding: $tp;
   background-color: #096dd9;
-  color: white;
+  color: black;
+  border: 1px solid black;
 }
 
 .thead {
   padding: $tp;
   background-color: #A5DEE4;
+  border: 1px solid black;
 }
