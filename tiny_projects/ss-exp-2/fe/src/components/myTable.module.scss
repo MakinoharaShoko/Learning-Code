@@ -1,0 +1,19 @@
+$tp: 15px 30px 15px 30px;
+$tm: 5px 10px 5px 10px;
+
+
+.element {
+  padding: $tp;
+  background-color: #7DB9DE;
+}
+
+.elementHead {
+  padding: $tp;
+  background-color: #096dd9;
+  color: white;
+}
+
+.thead {
+  padding: $tp;
+  background-color: #A5DEE4;
+}

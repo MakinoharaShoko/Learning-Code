@@ -4,6 +4,7 @@ import {Table, Tag, Space} from 'antd';
 import {Form, Input, Button, Checkbox, message} from 'antd';
 import 'antd/dist/antd.css';
 import axios from "axios";
+import {MyTable} from './components/MyTable';
 
 function App() {
 
@@ -106,7 +107,8 @@ function App() {
               <div>
                   <Button onClick={() => setLoginState(false)} type="primary">返回</Button>
               </div>
-              <Table columns={columns} dataSource={data}/>
+              <MyTable data={data}/>
+              {/*<Table columns={columns} dataSource={data}/>*/}
           </div>
       }
     </div>
