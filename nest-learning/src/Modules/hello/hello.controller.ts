@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { HelloService } from './hello.service';
 
-@Controller()
+@Controller('api/hello')
 export class HelloController {
   constructor(private readonly helloService: HelloService) {}
 
-  @Get('/api/hello')
+  @Get()
   apiTest(): string {
     return this.helloService.getHelloText();
   }
