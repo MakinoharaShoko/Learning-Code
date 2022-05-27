@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { HelloModule } from './Modules/hello/hello.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { TestguardModule } from './Modules/testguard/testguard.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/',
     }),
+    TestguardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
