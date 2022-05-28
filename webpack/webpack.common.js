@@ -56,5 +56,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: `assets/style.${bundle_random_str}.css`
         }),
-    ]
+    ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+    }
 }
