@@ -1,11 +1,7 @@
 import styles from './myTable.module.scss'
 
 interface IElement {
-  che: number
-  chn: number
-  mat: number
-  name: string
-  phy: number
+  [propsName: string]: any
 }
 
 interface IProps {
@@ -24,15 +20,19 @@ export function MyTable(props: IProps) {
       <td className={styles.element}>{e.phy}</td>
     </tr>
   })
+  const tableHead = [];
+  for (const e in props.data[0]) {
+    if (e === '_id') {
+      continue;
+    }
+    const temp = <th className={styles.thead} scope="col">{e}</th>
+    tableHead.push(temp);
+  }
   return <div style={{display: "flex", justifyContent: "center", fontSize: 'x-large'}}>
     <table>
       <thead>
       <tr>
-        <th className={styles.thead} scope="col">姓名</th>
-        <th className={styles.thead} scope="col">数学</th>
-        <th className={styles.thead} scope="col">语文</th>
-        <th className={styles.thead} scope="col">化学</th>
-        <th className={styles.thead} scope="col">物理</th>
+        {tableHead}
       </tr>
       </thead>
       <tbody>
