@@ -12,12 +12,14 @@ interface IProps {
 export function MyTable(props: IProps) {
   console.log(props.data);
   const tableElement = props.data.map((e, i) => {
+    const arr = [];
+    for (const key in e) {
+      if (key === '_id')
+        continue;
+      arr.push(<th className={styles.elementHead}>{e[key]}</th>)
+    }
     return <tr key={e.name}>
-      <th className={styles.elementHead}>{e.name}</th>
-      <td className={styles.element}>{e.mat}</td>
-      <td className={styles.element}>{e.chn}</td>
-      <td className={styles.element}>{e.che}</td>
-      <td className={styles.element}>{e.phy}</td>
+      {arr}
     </tr>
   })
   const tableHead = [];
