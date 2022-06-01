@@ -10,10 +10,9 @@ MongoClient.connect(MongoUrl, (err, db) => {
     if (err) throw err;
     let dbo = db.db('ss-exp-2');
     const insertData = [
-        {name: '张一', mat: 80, chn: 82, che: 71, phy: 87},
-        {name: '李二', mat: 86, chn: 90, che: 91, phy: 80},
-        {name: '王三', mat: 78, chn: 82, che: 87, phy: 76},
-        {name: '赵四', mat: 75, chn: 85, che: 80, phy: 77},
+        {Name: '张一', Math: 80, Chinese: 82, Chemical: 71, Physics: 87},
+        {Name: '李二', Math: 86, Chinese: 90, Chemical: 91, Physics: 80},
+        {Name: '王三', Math: 78, Chinese: 82, Chemical: 87, Physics: 76},
     ]
     dbo.collection('data').insertMany(insertData, (err, result) => {
         if (err) throw err;
