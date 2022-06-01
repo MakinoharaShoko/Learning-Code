@@ -1,25 +1,18 @@
 import './App.css'
-import {Provider} from "react-redux";
-import {TestReducer} from "./components/testReducer";
-import {store} from './store';
-import {TestRef, TestRefRef} from "./components/testRef";
 import React from 'react';
+import {useStateObject} from "./hooks/useObject";
 
 function App() {
-  const ref = React.useRef<TestRefRef>(null);
-  const logRef = () => {
-    console.log(ref.current);
-    ref.current!.increment();
+  const num = useStateObject(0)
+  const handerClick = () => {
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        num.setState(num.state + 1);
+        console.log(num.state);
+      }, 1000)
+    }
   }
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <TestReducer/>
-        <TestRef ref={ref}/>
-        <button onClick={logRef}>Log Ref and increase</button>
-      </div>
-    </Provider>
-  )
+  return <button onClick={handerClick}>{num.state}</button>
 }
 
 export default App
