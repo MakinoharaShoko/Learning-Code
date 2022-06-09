@@ -1,0 +1,12 @@
+{
+  "name": "webtest1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "cd ./tests && playwright test"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.22.2"
+  }
+}
