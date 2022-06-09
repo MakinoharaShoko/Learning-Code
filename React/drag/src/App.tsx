@@ -39,6 +39,7 @@ function App() {
   return <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
         {(provided, snapshot) => (
+          // 下面开始书写容器
           <div
             //provided.droppableProps应用的相同元素.
             {...provided.droppableProps}
@@ -48,6 +49,7 @@ function App() {
             {items.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {(provided, snapshot) => (
+                  // 下面开始书写可拖拽的元素
                   <div
                     ref={provided.innerRef}
                     {...provided.draggableProps}
