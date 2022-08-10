@@ -1,10 +1,12 @@
 import './App.css'
-import { AnimationTest } from './pages/animationtest/AnimationTest'
+import {AnimationTest} from './pages/animationtest/AnimationTest'
+import WaterFall from "./pages/waterfallTest/WaterFall";
 
 function App() {
+  const list = [200, 300, 500, 100, 200, 300, 200, 700];
   return (
     <div className="App">
-      <AnimationTest />
+      <WaterFall list={list}/>
     </div>
   )
 }
