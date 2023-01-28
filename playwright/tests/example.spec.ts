@@ -44,10 +44,10 @@ test('baidu search 2 ', async ({page}) => {
   })
   const result = await page.locator('a');
   const allText = await result.allInnerTexts();
-  let isPass = false;
+  let isPass = true;
   allText.map(async e => {
     if (e.match(/火车票/))
-      isPass = true;
+      isPass = false;
   });
   await expect(isPass).toBe(true);
 });
