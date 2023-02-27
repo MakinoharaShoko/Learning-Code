@@ -1,0 +1,12 @@
+{
+  "name": "cordova",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "cordova": "^11.1.0"
+  },
+  "scripts": {
+    "create":"cordova create app"
+  }
+}
