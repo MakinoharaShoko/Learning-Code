@@ -77,7 +77,7 @@ class JsonParser extends EmbeddedActionsParser {
 
         $.RULE("objectItem", () => {
             let lit, key, value;
-            const obj = {};
+            const obj:any = {};
 
             lit = $.CONSUME(StringLiteral)
             $.CONSUME(Colon);
@@ -92,11 +92,11 @@ class JsonParser extends EmbeddedActionsParser {
 
 
         $.RULE("array", () => {
-            const arr = [];
+            const arr:any[] = [];
             $.CONSUME(LSquare);
             $.MANY_SEP({
                 SEP: Comma, DEF: () => {
-                    arr.push($.SUBRULE($.value));
+                    arr.push($.SUBRULE($.value) as never);
                 }
             });
             $.CONSUME(RSquare);
@@ -144,7 +144,7 @@ class JsonParser extends EmbeddedActionsParser {
 
 const parser = new JsonParser();
 
-function parseInput(text) {
+function parseInput(text:string) {
     const lexingResult = JsonLexer.tokenize(text)
     // "input" is a setter which will reset the parser's state.
     parser.input = lexingResult.tokens

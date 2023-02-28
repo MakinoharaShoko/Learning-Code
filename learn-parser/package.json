@@ -9,5 +9,6 @@
   },
   "devDependencies": {
     "ts-node": "^10.9.1"
-  }
+  },
+  "scripts": {"dev":"ts-node index.ts"}
 }
