@@ -149,11 +149,12 @@ function parseInput(text) {
     // "input" is a setter which will reset the parser's state.
     parser.input = lexingResult.tokens
     const result = parser.json();
-    return result
 
     if (parser.errors.length > 0) {
         throw new Error("sad sad panda, Parsing errors detected")
     }
+
+    return result
 }
 
 const result = parseInput('{"data":[{"a":1},{"b":"str"}]}');
