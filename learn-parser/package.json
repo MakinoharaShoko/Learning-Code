@@ -6,5 +6,8 @@
   "dependencies": {
     "chevrotain": "^10.4.2",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
   }
 }
