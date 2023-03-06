@@ -1,0 +1,11 @@
+name = "devc"
+main = "src/index.ts"
+compatibility_date = "2023-03-06"
+kv_namespaces = [
+    { binding = "main", id = "868ec5bcafa44a9aa16d40befdda37f7" }
+]
+
+[[ d1_databases ]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "maindb"
+database_id = "ecdcef30-3879-4eaf-93dc-bbd45a2baaa7"
