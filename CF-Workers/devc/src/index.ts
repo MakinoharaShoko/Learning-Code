@@ -8,6 +8,8 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import axios from "axios";
+
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace;
@@ -31,10 +33,18 @@ export default {
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
-		const value: string = await env.main.get('test') ?? '';
-		const { results } = await env.DB.prepare(
-			"SELECT * FROM Customers"
-		).bind().all();
-		return new Response("Hello World!" + value + JSON.stringify(results));
+		if (request.url.match('openai')) {
+			const apiKey = await env.main.get('api-key') ?? '';
+			const text = await request.text();
+			const result = await axios.post('https://api.openai.com/v1/chat/completions', {
+				"model": "gpt-3.5-turbo",
+				"messages": [{ "role": "user", "content": text }]
+			}, { headers: { Authorization: `Bearer ${apiKey}` } })
+			return new Response(result.data.choices[0].message.content);
+		}
+		else {
+			return new Response("Hello World!");
+		}
+
 	},
 };

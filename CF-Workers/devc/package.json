@@ -12,6 +12,9 @@
     "start": "wrangler dev",
     "deploy": "wrangler publish",
     "test": "vitest",
-    "initdb":"wrangler d1 execute maindb --file=./src/initDB/init.sql"
+    "initdb": "wrangler d1 execute maindb --file=./src/initDB/init.sql"
+  },
+  "dependencies": {
+    "axios": "^1.3.5"
   }
 }
