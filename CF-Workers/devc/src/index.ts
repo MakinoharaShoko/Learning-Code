@@ -8,7 +8,7 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import axios from "axios";
+const axios = require('axios');
 
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
@@ -35,12 +35,25 @@ export default {
 	): Promise<Response> {
 		if (request.url.match('openai')) {
 			const apiKey = await env.main.get('api-key') ?? '';
-			const text = await request.text();
-			const result = await axios.post('https://api.openai.com/v1/chat/completions', {
-				"model": "gpt-3.5-turbo",
-				"messages": [{ "role": "user", "content": text }]
-			}, { headers: { Authorization: `Bearer ${apiKey}` } })
-			return new Response(result.data.choices[0].message.content);
+			let text = await request.text();
+			const text2 = request.url.split('/').pop();
+			if (text2 !== 'openai') {
+				text = text + text2;
+			}
+			const result = await fetch('https://api.openai.com/v1/chat/completions', {
+				method: 'POST',
+				body: JSON.stringify({
+					"model": "gpt-3.5-turbo",
+					"messages": [{ "role": "user", "content": text }]
+				})
+				, headers: {
+					Authorization: `Bearer ${apiKey}`,
+					'Content-Type': 'application/json'
+				}
+			})
+			const resultJSON: any = await result.json();
+			const resultText = resultJSON.choices[0].message.content;
+			return new Response(resultText);
 		}
 		else {
 			return new Response("Hello World!");
