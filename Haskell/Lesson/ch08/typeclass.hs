@@ -28,3 +28,10 @@ instance (Eq2 m) => Eq2 (Maybe m) where
     Just x === Just y = x === y
     Nothing === Nothing = True
     _ === _ = False
+
+
+-- 不能这样写，因为无法保证 (Maybe m) 中的 m 属于 Eq
+-- instance Eq (Maybe m) where
+--     Just x == Just y = x == y
+--     Nothing == Nothing = True
+--     _ == _ = False
