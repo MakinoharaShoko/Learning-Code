@@ -21,3 +21,10 @@ instance Show TrafficLight where
     show Red = "Red light"
     show Yellow = "Yellow light"
     show Green = "Green light"
+
+
+-- 与需要计算的类型一起用
+instance (Eq2 m) => Eq2 (Maybe m) where
+    Just x === Just y = x === y
+    Nothing === Nothing = True
+    _ === _ = False
