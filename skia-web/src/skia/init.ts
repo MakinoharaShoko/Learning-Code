@@ -12,7 +12,11 @@ export let tanziId = {id: 0};
 
 export async function init() {
     if (!skia.isInit) {
-        const CanvasKit = await CanvasKitInit()
+        const CanvasKit = await CanvasKitInit({
+            locateFile(file: string): string {
+                return `./${file}`
+            }
+        })
         skia.CanvasKit = CanvasKit
         const canvasElement: HTMLElement | null = document.getElementById('canvas')
         const canvasInstance = canvasElement as HTMLCanvasElement
