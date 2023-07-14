@@ -40,3 +40,20 @@ export function splitChars(sentence: string) {
 
     return words;
 }
+
+export function redAlphaText(text: {
+    text: string,
+    alpha: number
+}[]) {
+    let prevStr = '';
+    let newStrArr = [];
+    for (const e of text) {
+        if (e.alpha >= 1) {
+            prevStr = prevStr + e.text;
+        } else {
+            newStrArr.push(e)
+        }
+    }
+    newStrArr.unshift({text: prevStr, alpha: 1})
+    return newStrArr
+}

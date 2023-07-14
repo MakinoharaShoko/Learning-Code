@@ -69,16 +69,49 @@ export async function tanzi(waitTime: number, text: string, fontSize: number) {
     } else {
         textDrawer.resetFontSize(fontSize)
     }
-    // let textToDraw = '';
-    for (const word of textArray) {
-        if (tanziId.id === initialTanzi) {
-            // textToDraw = textToDraw + word
-            // console.log(textToDraw)
-            // textDrawer.drawText(textToDraw)
-            textDrawer.drawText(word)
-            await aswait(waitTime)
-        } else return
+
+    /**
+     * 测试代码，待删除
+     */
+        // textDrawer.drawAlphaTextArray([{text: '1', alpha: 1}, {text: '5', alpha: 0.5}])
+        // return;
+
+    const fadeInTextArray = textArray.map(e => ({text: e, alpha: 0}));
+    const checkIsComplete = () => {
+        let isComplete = true;
+        for (const e of fadeInTextArray) {
+            if (e.alpha < 1) {
+                isComplete = false
+            }
+        }
+        return isComplete
     }
+    let currAddIndex = 0;
+    let from = 0;
+    while (!checkIsComplete()) {
+        if (!(tanziId.id === initialTanzi)) {
+            return
+        }
+        for (let i = from; i < fadeInTextArray.length && i <= currAddIndex; i++) {
+            if (fadeInTextArray[i].alpha < 1)
+                fadeInTextArray[i].alpha += 0.05;
+            else from = i;
+        }
+        currAddIndex++;
+        textDrawer.drawAlphaTextArray(fadeInTextArray)
+        await aswait(waitTime / 20)
+    }
+
+    // let textToDraw = '';
+    // for (const word of textArray) {
+    //     if (tanziId.id === initialTanzi) {
+    //         // textToDraw = textToDraw + word
+    //         // console.log(textToDraw)
+    //         // textDrawer.drawText(textToDraw)
+    //         textDrawer!.drawText(word)
+    //         await aswait(waitTime)
+    //     } else return
+    // }
 }
 
 
