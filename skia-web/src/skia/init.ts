@@ -3,23 +3,23 @@ import CanvasKitInit, {CanvasKit, FontSlant, FontWeight, FontWidth, Surface} fro
 export const skia: {
     CanvasKit: CanvasKit | null,
     surface: Surface | null
-} = {CanvasKit: null, surface: null}
+    isInit: boolean
+} = {CanvasKit: null, surface: null, isInit: false}
 
-export function init() {
-    CanvasKitInit().then(
-        (CanvasKit) => {
-            skia.CanvasKit = CanvasKit
-            console.log("CanvasKit loaded");
-            console.log(CanvasKit);
-            const canvasElement: HTMLElement | null = document.getElementById('canvas')
-            const canvasInstance = canvasElement as HTMLCanvasElement
-            if (canvasInstance) {
-                skia.surface = CanvasKit.MakeWebGLCanvasSurface(canvasInstance)
-                // drawTrig()
-                tanzi(200, 'Skia is a complete 2D graphic library for drawing Text, Geometries, and Images. Skia 是一个完整的 2D 图形库，用于绘制文本、几何图形和图片。')
-            }
+export let tanziId = {id:0};
+
+export async function init() {
+    if (!skia.isInit) {
+        const CanvasKit = await CanvasKitInit()
+        skia.CanvasKit = CanvasKit
+        const canvasElement: HTMLElement | null = document.getElementById('canvas')
+        const canvasInstance = canvasElement as HTMLCanvasElement
+        if (canvasInstance) {
+            skia.surface = CanvasKit.MakeWebGLCanvasSurface(canvasInstance)
+            skia.isInit = true;
         }
-    );
+    }
+
 }
 
 const drawTrig = () => {
@@ -46,15 +46,18 @@ const aswait = (time: number) => {
     })
 }
 
-async function tanzi(waitTime: number, text: string) {
+export async function tanzi(waitTime: number, text: string) {
+    const initialTanzi = tanziId.id;
     const robotoData = await fetch('fonts/SourceHanSerifCN-Regular.ttf')
         .then((response) => response.arrayBuffer());
     const textArray = text.split(' ');
     let textToDraw = '';
     for (const word of textArray) {
-        textToDraw = textToDraw + word + ' '
-        drawText(textToDraw, robotoData)
-        await aswait(waitTime)
+        if(tanziId.id === initialTanzi){
+            textToDraw = textToDraw + word + ' '
+            drawText(textToDraw, robotoData)
+            await aswait(waitTime)
+        }
     }
 }
 
@@ -67,7 +70,7 @@ const drawText = (text: string, fontData: ArrayBuffer) => {
     const fontMgr = CanvasKit.FontMgr.FromData(fontData);
     const paraStyle = new CanvasKit.ParagraphStyle({
         textStyle: {
-            fontSize:64,
+            fontSize: 64,
         },
         textAlign: CanvasKit.TextAlign.Left,
     });
@@ -79,7 +82,7 @@ const drawText = (text: string, fontData: ArrayBuffer) => {
     const shader = CanvasKit.Shader.MakeLinearGradient(
         [0, 64], // 渐变的起点
         [0, 160], // 渐变的终点
-        [CanvasKit.Color(46,169,223,1), CanvasKit.Color(0,92,175,1)], // 渐变的颜色
+        [CanvasKit.Color(46, 169, 223, 1), CanvasKit.Color(0, 92, 175, 1)], // 渐变的颜色
         [0, 1], // 颜色的位置
         CanvasKit.TileMode.Repeat,
     );
@@ -100,8 +103,8 @@ const drawText = (text: string, fontData: ArrayBuffer) => {
         fontSize: 64, // Font size
         fontStyle: {
             weight: CanvasKit.FontWeight.Normal,
-            width:CanvasKit.FontWidth.Normal,
-            slant:CanvasKit.FontSlant.Oblique,
+            width: CanvasKit.FontWidth.Normal,
+            slant: CanvasKit.FontSlant.Oblique,
         }, // Normal font style
         foregroundColor: CanvasKit.Color4f(0, 0, 0, 1), // Black foreground color
         heightMultiplier: 1.5, // Default height multiplier
@@ -110,9 +113,9 @@ const drawText = (text: string, fontData: ArrayBuffer) => {
         locale: 'en', // Default locale
         shadows: [
             {
-                color:[0,0,0,0.5],
-                blurRadius:5,
-                offset:[2,2]
+                color: [0, 0, 0, 0.5],
+                blurRadius: 5,
+                offset: [2, 2]
             },
             {
                 color: CanvasKit.Color4f(1, 1, 1, 1), // Border color (white)
