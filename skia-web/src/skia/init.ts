@@ -88,18 +88,19 @@ export async function tanzi(waitTime: number, text: string, fontSize: number) {
     }
     let currAddIndex = 0;
     let from = 0;
+    const delta = waitTime/10;
     while (!checkIsComplete()) {
         if (!(tanziId.id === initialTanzi)) {
             return
         }
         for (let i = from; i < fadeInTextArray.length && i <= currAddIndex; i++) {
             if (fadeInTextArray[i].alpha < 1)
-                fadeInTextArray[i].alpha += 0.05;
+                fadeInTextArray[i].alpha += delta;
             else from = i;
         }
         currAddIndex++;
         textDrawer.drawAlphaTextArray(fadeInTextArray)
-        await aswait(waitTime / 20)
+        await aswait(10)
     }
 
     // let textToDraw = '';
