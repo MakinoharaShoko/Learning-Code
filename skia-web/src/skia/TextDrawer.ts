@@ -66,13 +66,12 @@ export class TextDrawer {
                 this.paint?.setAlphaf(e.alpha);
                 this.resetBuilderStyle(e.alpha)
             }
-            this.drawText(e.text)
-            // drawCountOfSlice++;
+            this.builder.addText(e.text)
         }
-        // console.log(drawCountOfSlice)
+        this.drawText()
     }
-    public drawText(text: string, x = 0, y = 0) {
-        this.builder.addText(text);
+
+    public drawText(x = 0, y = 0) {
         const paragraph = this.builder.build();
         paragraph.layout(1000); // width in pixels to use when wrapping text
         if (this.setShaderFlag) {
