@@ -21,6 +21,8 @@ export class TextDrawer {
     private fontMgr
     private fontSize: number = 48;
     private currentAlphaf = 1;
+    // 每次改变字体大小的时候，才需要重新设置 shader，此时打开 flag，在第一次 Layout 后测量并重设 Shader
+    private setShaderFlag = false;
 
     constructor(skia: {
         CanvasKit: CanvasKit | null,
@@ -52,31 +54,37 @@ export class TextDrawer {
         text: string,
         alpha: number
     }[]) {
-        let resetCount = 0;
-        let drawCount = 0;
+        // let drawCountOfSlice = 0;
         this.resetBuilderOnlyAlpha(1)
-        const reduTexts = redAlphaText(texts)
+        const reduTexts = redAlphaText(texts).filter(e => e.alpha > 0 && e.text !== '')
         for (const e of reduTexts) {
             if (e.alpha === 0) {
                 continue;
             }
             if (this.currentAlphaf !== e.alpha) {
-                resetCount++
                 this.currentAlphaf = e.alpha
                 this.paint?.setAlphaf(e.alpha);
                 this.resetBuilderStyle(e.alpha)
             }
             this.drawText(e.text)
-            drawCount++;
+            // drawCountOfSlice++;
         }
+        // console.log(drawCountOfSlice)
     }
-
-    public drawText(text: string) {
+    public drawText(text: string, x = 0, y = 0) {
         this.builder.addText(text);
         const paragraph = this.builder.build();
         paragraph.layout(1000); // width in pixels to use when wrapping text
+        if (this.setShaderFlag) {
+            const lineMetrics = paragraph.getLineMetrics();
+            if (lineMetrics.length > 0) {
+                const baseline = lineMetrics[0].baseline;
+                this.setShader(baseline, this.fontSize, this.fontSize * 1.5, x, y)
+                this.setShaderFlag = false;
+            }
+        }
         this.canvas.clear(this.CanvasKit.TRANSPARENT)
-        this.canvas.drawParagraph(paragraph, 40, 40);
+        this.canvas.drawParagraph(paragraph, x, y);
         skia.surface!.flush();
     }
 
@@ -94,21 +102,24 @@ export class TextDrawer {
         this.transparentPaint = new this.CanvasKit.Paint();
         this.transparentPaint.setColor(this.CanvasKit.TRANSPARENT);
         this.transparentPaint.setStyle(this.CanvasKit.PaintStyle.Fill);
+        this.paint = new this.CanvasKit.Paint();
+        this.paint.setStyle(this.CanvasKit.PaintStyle.Fill);
+        this.paint.setAntiAlias(true);
+        this.resetBuilderOnlyAlpha(1);
+        this.setShader(fontSize, fontSize, fontSize * 1.5, 0, 0)
+        this.setShaderFlag = true;
+    }
+
+    private setShader(baseline: number, fontSize: number, lineHeight: number, x: number, y: number) {
         this.shader = this.CanvasKit.Shader.MakeLinearGradient(
-            [0, this.fontSize], // 渐变的起点
-            [0, this.fontSize * 2.5], // 渐变的终点
+            [x, y + baseline - fontSize], // 渐变的起点
+            [x, y + baseline - fontSize + lineHeight], // 渐变的终点
             [this.CanvasKit.Color(46, 169, 223, 1), this.CanvasKit.Color(0, 92, 175, 1)], // 渐变的颜色
             [0, 1], // 颜色的位置
             this.CanvasKit.TileMode.Repeat,
         );
-
         // 创建一个使用该 Shader 的 Paint
-        console.log('build shader')
-        this.paint = new this.CanvasKit.Paint();
-        this.paint.setStyle(this.CanvasKit.PaintStyle.Fill);
-        this.paint.setShader(this.shader);
-        this.paint.setAntiAlias(true);
-        this.resetBuilderOnlyAlpha(1);
+        this.paint!.setShader(this.shader);
     }
 
     public resetBuilderOnlyAlpha(alpha: number) {

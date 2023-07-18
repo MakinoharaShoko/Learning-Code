@@ -9,7 +9,7 @@ export default function Canvas() {
 只是贴上忘却的标签来掩饰
 The things that are stuck in your chest, time won't solve them. It just pastes the label of oblivion.`)
     const [fontSize,setFontSize] = useState(48)
-    const [delay,setDelay] = useState(100)
+    const [delay,setDelay] = useState(50)
     useEffect(() => {
         init().then(() => {
             tanziId.id++;
@@ -18,8 +18,8 @@ The things that are stuck in your chest, time won't solve them. It just pastes t
     }, [str,fontSize,delay]);
     return <div style={{display: "flex", flexFlow: 'column', alignItems: 'center'}}>
         <div>
-            Font Size:<input type={"range"} onChange={e=>setFontSize(Number(e.target.value))} value={fontSize} min={36} max={64} />{fontSize}{`\u00a0\u00a0\u00a0`}
-            Text Display Delay:<input type={"range"} onChange={e=>setDelay(Number(e.target.value))} value={delay} min={0} max={1000} />{delay}
+            Font Size:<input type={"range"} onChange={e=>setFontSize(Number(e.target.value))} value={fontSize} min={36} max={128} />{fontSize}{`\u00a0\u00a0\u00a0`}
+            Text Display Delay:<input type={"range"} onChange={e=>setDelay(Number(e.target.value))} value={delay} min={10} max={1000} />{delay}
         </div>
         <textarea style={{width: 800, height: 150}} value={str} onChange={(event) => {
             setStr(event.target.value)

@@ -62,7 +62,6 @@ export async function tanzi(waitTime: number, text: string, fontSize: number) {
         fontData = await fetch('fonts/SourceHanSerifCN-Regular.ttf')
             .then((response) => response.arrayBuffer());
     const textArray = splitChars(text);
-    console.log(textArray)
     if (!fontData) return
     if (!textDrawer) {
         textDrawer = new TextDrawer(skia, fontData, fontSize)
@@ -88,20 +87,28 @@ export async function tanzi(waitTime: number, text: string, fontSize: number) {
     }
     let currAddIndex = 0;
     let from = 0;
-    const delta = waitTime/10;
-    while (!checkIsComplete()) {
-        if (!(tanziId.id === initialTanzi)) {
-            return
+    const delta = 1 / (waitTime / 1.5);
+    const startTime = new Date().getTime();
+    draw();
+
+    function draw() {
+        if (!checkIsComplete()) {
+            if (!(tanziId.id === initialTanzi)) {
+                return
+            }
+            const curr = new Date().getTime();
+            const pass = curr - startTime;
+            currAddIndex = Math.floor(pass / waitTime);
+            for (let i = from; i < fadeInTextArray.length && i <= currAddIndex; i++) {
+                if (fadeInTextArray[i].alpha < 1)
+                    fadeInTextArray[i].alpha += delta;
+                else from = i;
+            }
+            textDrawer!.drawAlphaTextArray(fadeInTextArray)
+            requestAnimationFrame(draw)
         }
-        for (let i = from; i < fadeInTextArray.length && i <= currAddIndex; i++) {
-            if (fadeInTextArray[i].alpha < 1)
-                fadeInTextArray[i].alpha += delta;
-            else from = i;
-        }
-        currAddIndex++;
-        textDrawer.drawAlphaTextArray(fadeInTextArray)
-        await aswait(10)
     }
+
 
     // let textToDraw = '';
     // for (const word of textArray) {
