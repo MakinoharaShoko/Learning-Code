@@ -57,7 +57,7 @@ export async function tanziFunction(waitTime: number, text: string, fontSize: nu
                     fadeInTextArray[i].alpha += delta;
                 else from = i;
             }
-            tanzi.textDrawer!.drawAlphaTextArray(fadeInTextArray)
+            tanzi.textDrawer!.drawAlphaTextArray(fadeInTextArray,40,40)
             requestAnimationFrame(draw)
         }
     }
