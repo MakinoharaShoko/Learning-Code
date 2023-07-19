@@ -1,13 +1,10 @@
-import CanvasKitInit, {
+import {
     CanvasKit,
-    FontSlant,
-    FontWeight,
-    FontWidth,
     Paint,
     ParagraphBuilder,
     Surface
 } from "canvaskit-wasm";
-import {skia} from "@/skia/init";
+import {skia} from "@/skia/skia";
 import {redAlphaText} from "@/skia/strutil";
 
 export class TextDrawer {
@@ -18,7 +15,7 @@ export class TextDrawer {
     private paint: Paint | null | undefined
     private builder: ParagraphBuilder
     private canvas;
-    private fontMgr
+    private readonly fontMgr;
     private fontSize: number = 48;
     private currentAlphaf = 1;
     // 每次改变字体大小的时候，才需要重新设置 shader，此时打开 flag，在第一次 Layout 后测量并重设 Shader
@@ -54,7 +51,6 @@ export class TextDrawer {
         text: string,
         alpha: number
     }[]) {
-        // let drawCountOfSlice = 0;
         this.resetBuilderOnlyAlpha(1)
         const reduTexts = redAlphaText(texts).filter(e => e.alpha > 0 && e.text !== '')
         for (const e of reduTexts) {
