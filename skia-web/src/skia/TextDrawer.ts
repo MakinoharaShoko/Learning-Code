@@ -50,7 +50,7 @@ export class TextDrawer {
     public drawAlphaTextArray(texts: {
         text: string,
         alpha: number
-    }[]) {
+    }[], x = 0, y = 0) {
         this.resetBuilderOnlyAlpha(1)
         const reduTexts = redAlphaText(texts).filter(e => e.alpha > 0 && e.text !== '')
         for (const e of reduTexts) {
@@ -64,7 +64,7 @@ export class TextDrawer {
             }
             this.builder.addText(e.text)
         }
-        this.drawText()
+        this.drawText(x, y)
     }
 
     public drawText(x = 0, y = 0) {
