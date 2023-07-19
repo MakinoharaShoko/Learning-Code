@@ -2,11 +2,8 @@ import React, {useEffect, useState} from "react";
 import {tanzi, tanziFunction} from "@/skia/tanzi";
 
 export default function Canvas() {
-    const [str, setStr] = useState(`胸につかえていることを、时は解决してくれない。
-忘却のラベルを贴るだけで
-心中怀抱的东西
-并不能随时间流去而淡解
-只是贴上忘却的标签来掩饰
+    const [str, setStr] = useState(`胸につかえていることを、时は解决してくれない。忘却のラベルを贴るだけで。
+心中怀抱的东西，并不能随时间流去而淡解。只是贴上忘却的标签来掩饰。
 The things that are stuck in your chest, time won't solve them. It just pastes the label of oblivion.`)
     const [fontSize, setFontSize] = useState(48)
     const [delay, setDelay] = useState(50)
