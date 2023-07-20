@@ -1,7 +1,7 @@
 import {
     CanvasKit,
     Paint,
-    ParagraphBuilder,
+    ParagraphBuilder, Shader,
     Surface
 } from "canvaskit-wasm";
 import {skia} from "@/skia/skia";
@@ -10,8 +10,8 @@ import {redAlphaText} from "@/skia/strutil";
 export class TextDrawer {
     private CanvasKit: CanvasKit
     private paraStyle;
-    private transparentPaint: any
-    private shader: any
+    private transparentPaint: Paint | undefined
+    private shader: Shader | undefined
     private paint: Paint | null | undefined
     private builder: ParagraphBuilder
     private canvas;
@@ -92,11 +92,20 @@ export class TextDrawer {
             },
             textAlign: this.CanvasKit.TextAlign.Left,
         });
+        if (this.builder) {
+            this.builder.delete();
+        }
         this.builder = this.CanvasKit.ParagraphBuilder.Make(this.paraStyle, this.fontMgr!);
 
+        if (this.transparentPaint) {
+            this.transparentPaint.delete();
+        }
         this.transparentPaint = new this.CanvasKit.Paint();
         this.transparentPaint.setColor(this.CanvasKit.TRANSPARENT);
         this.transparentPaint.setStyle(this.CanvasKit.PaintStyle.Fill);
+        if (this.paint) {
+            this.paint.delete();
+        }
         this.paint = new this.CanvasKit.Paint();
         this.paint.setStyle(this.CanvasKit.PaintStyle.Fill);
         this.paint.setAntiAlias(true);
@@ -106,6 +115,9 @@ export class TextDrawer {
     }
 
     private setShader(baseline: number, fontSize: number, lineHeight: number, x: number, y: number) {
+        if (this.shader) {
+            this.shader.delete();
+        }
         this.shader = this.CanvasKit.Shader.MakeLinearGradient(
             [x, y + baseline - fontSize], // 渐变的起点
             [x, y + baseline - fontSize + lineHeight], // 渐变的终点
@@ -125,6 +137,9 @@ export class TextDrawer {
             },
             textAlign: this.CanvasKit.TextAlign.Left,
         });
+        if (this.builder) {
+            this.builder.delete();
+        }
         this.builder = this.CanvasKit.ParagraphBuilder.Make(this.paraStyle, this.fontMgr!);
         this.resetBuilderStyle(alpha);
     }
@@ -178,6 +193,6 @@ export class TextDrawer {
             ],
             textBaseline: this.CanvasKit.TextBaseline.Alphabetic, // Alphabetic text baseline
             wordSpacing: 0.0, // Default word spacing
-        }, this.paint!, this.transparentPaint)
+        }, this.paint!, this.transparentPaint!)
     }
 }
