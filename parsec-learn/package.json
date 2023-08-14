@@ -8,6 +8,7 @@
     "ch02": "tsx ch02.ts"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "tsx": "^3.12.7",
     "typescript-parsec": "^0.3.4",
     "webgal-parser": "^4.4.3"
