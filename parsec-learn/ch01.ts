@@ -3,10 +3,10 @@ import { Token, buildLexer, expectEOF, expectSingleResult, list_sc, lrec_sc, rep
 import { alt, apply, kmid, opt, seq, str } from 'typescript-parsec';
 
 enum TokenKind {
-  Space, 
-  Dash, 
-  Number, 
-  Boolean, 
+  Space,
+  Dash,
+  Number,
+  Boolean,
   Identifier,
   Colon,
   Equals,
@@ -14,7 +14,7 @@ enum TokenKind {
 }
 
 const lexer = buildLexer([
-  [false, /^\s+/g, TokenKind.Space],
+  [true, /^\s+/g, TokenKind.Space],
   [true, /^\-/g, TokenKind.Dash],
   [true, /^\d+/g, TokenKind.Number], // 数字模式
   [true, /^true|false/g, TokenKind.Boolean], // 布尔值模式
@@ -39,11 +39,23 @@ ARGK.setPattern(
 )
 
 function applyNumber(value) {
-  return +value;
+  return Number(value.text);
+}
+
+function applyBoolean(value) {
+  switch (value.text) {
+    case 'true': return true;
+    case 'false': return false;
+    default: return true;
+  }
+}
+
+function applyString(value) {
+  return value.text
 }
 
 ARGV.setPattern(
-  alt(tok(TokenKind.Boolean), apply(tok(TokenKind.Number), applyNumber), tok(TokenKind.Identifier))
+  alt(apply(tok(TokenKind.Boolean), applyBoolean), apply(tok(TokenKind.Number), applyNumber), apply(tok(TokenKind.Identifier), applyString))
 )
 
 ARG.setPattern(
@@ -94,7 +106,7 @@ SCRIPT.setPattern(
 
 
 
-const script = `command:content;comment`
+const script = `command:content -arg=1 -argt=2 -argthree=true;comment`
 
 const result = expectEOF(SCRIPT.parse(lexer.parse(script)))
 
