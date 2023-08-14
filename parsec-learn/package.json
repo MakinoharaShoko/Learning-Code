@@ -1,0 +1,15 @@
+{
+  "name": "parsec-learn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "ch01": "tsx ch01.ts",
+    "ch02": "tsx ch02.ts"
+  },
+  "dependencies": {
+    "tsx": "^3.12.7",
+    "typescript-parsec": "^0.3.4",
+    "webgal-parser": "^4.4.3"
+  }
+}
