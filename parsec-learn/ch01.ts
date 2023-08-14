@@ -18,7 +18,7 @@ const lexer = buildLexer([
   [true, /^\-/g, TokenKind.Dash],
   [true, /^\d+/g, TokenKind.Number], // 数字模式
   [true, /^true|false/g, TokenKind.Boolean], // 布尔值模式
-  [true, /^[a-zA-Z]+\b/g, TokenKind.Identifier], // 标识符模式
+  [true, /^[a-zA-Z\d]+\b/g, TokenKind.Identifier], // 标识符模式
   [true, /^\:/g, TokenKind.Colon], // 冒号模式
   [true, /^\=/g, TokenKind.Equals], // 等号模式
   [true, /^\;/g, TokenKind.SemiColon], // 分号模式
@@ -106,7 +106,7 @@ SCRIPT.setPattern(
 
 
 
-const script = `command:content -arg=1 -argt=2 -argthree=true;comment`
+const script = `command:content contentaaa -arg=1 -argt=2 -argthree=true;comment`
 
 const result = expectEOF(SCRIPT.parse(lexer.parse(script)))
 
