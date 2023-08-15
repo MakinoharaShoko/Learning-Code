@@ -21,7 +21,7 @@ const lexer = buildLexer([
   [true, /^\-/g, TokenKind.Dash],
   [true, /^\d+/g, TokenKind.Number], // 数字模式
   [true, /^true|false/g, TokenKind.Boolean], // 布尔值模式
-  [true, /^[a-zA-Z\d]+\b/g, TokenKind.Identifier], // 标识符模式
+  [true, /^[\u4e00-\u9fff\w\p{P}\.,!?']+/g, TokenKind.Identifier], // 标识符模式
   [true, /^\:/g, TokenKind.Colon], // 冒号模式
   [true, /^\=/g, TokenKind.Equals], // 等号模式
   [true, /^\;/g, TokenKind.SemiColon], // 分号模式
@@ -100,10 +100,9 @@ function applyColon(value) {
 }
 
 function applyContent(value) {
-  console.log(value);
   const words = value;
   const validWords = words.filter(e => e?.type === 'word')
-  const validValue = validWords.map(e=>e.value).reduce((prev, curr) => prev +' '+ curr, '')
+  const validValue = validWords.map(e=>e.value).reduce((prev, curr) => prev +' '+ curr, '').trim()
   return { type: 'content', value: validValue }
 }
 
@@ -153,7 +152,7 @@ SCRIPT.setPattern(
   apply(list_sc(LINE, alt(tok(TokenKind.LF), tok(TokenKind.CRLF))), applySctipt)
 );
 
-const script = `WebGAL:Hello Im WebGALs next generation parser -arg1=1 -arg2=2 -arg3=true -arg4;comment
+const script = `WebGAL:Hello, I'm WebGAL's next generation parser. -arg1 -arg2=2 -arg3=true -arg4=Hello!;comment
 command:content1 -arg1=1 -arg2=2 -arg3=true -arg4;comment
 command:content2 -arg1=1 -arg2=2 -arg3=true -arg4;comment`
 
