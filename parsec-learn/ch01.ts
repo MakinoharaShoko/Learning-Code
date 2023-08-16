@@ -219,7 +219,7 @@ fs.readFile('ch01.txt').then(r => {
   const script = r.toString()
   const result = expectEOF(SCRIPT.parse(lexer.parse(script))) //@ts-ignore
   const output = result?.candidates?.[0]?.result;
-  console.log(output);
+  console.log(JSON.stringify(output,undefined,4));
 })
 
 
