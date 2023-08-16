@@ -13,7 +13,8 @@ enum TokenKind {
   Equals,
   SemiColon,
   LF,
-  CRLF
+  CRLF,
+  ARGST,
 }
 
 const lexer = buildLexer([
@@ -21,12 +22,13 @@ const lexer = buildLexer([
   [true, /^\-/g, TokenKind.Dash],
   [true, /^\d+/g, TokenKind.Number], // 数字模式
   [true, /^true|false/g, TokenKind.Boolean], // 布尔值模式
-  [true, /^[\u4e00-\u9fff\w\p{P}\.,!?']+/g, TokenKind.Identifier], // 标识符模式
+  [true, /^[^:;\s ]+/g, TokenKind.Identifier], // 标识符模式
   [true, /^\:/g, TokenKind.Colon], // 冒号模式
   [true, /^\=/g, TokenKind.Equals], // 等号模式
   [true, /^\;/g, TokenKind.SemiColon], // 分号模式
   [true, /^\n/g, TokenKind.LF], // 等号模式
   [true, /^\r\n/g, TokenKind.CRLF], // 分号模式
+  [true,/^ -/g,TokenKind.ARGST]
 ]);
 
 const CONTENT = rule();
@@ -82,9 +84,7 @@ ARG.setPattern(
 
 
 ARG_START.setPattern(
-  seq(
-    tok(TokenKind.Space), tok(TokenKind.Dash)
-  )
+  tok(TokenKind.ARGST)
 )
 
 ARGS.setPattern(
