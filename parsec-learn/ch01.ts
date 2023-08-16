@@ -22,7 +22,7 @@ const lexer = buildLexer([
   [true, /^\-/g, TokenKind.Dash],
   [true, /^\d+/g, TokenKind.Number], // 数字模式
   [true, /^true|false/g, TokenKind.Boolean], // 布尔值模式
-  [true, /^[^:;\s ]+/g, TokenKind.Identifier], // 标识符模式
+  [true, /^[^:;\s =]+/g, TokenKind.Identifier], // 标识符模式
   [true, /^\:/g, TokenKind.Colon], // 冒号模式
   [true, /^\=/g, TokenKind.Equals], // 等号模式
   [true, /^\;/g, TokenKind.SemiColon], // 分号模式
@@ -178,20 +178,49 @@ LINE.setPattern(
 )
 
 function applySctipt(value) {
-  return value.filter(e => e?.type === 'line');
+  const lines = value.filter(e => e?.type === 'line')
+  const parsedLines = lines.map(line => {
+    const parsedLine: {
+      command: string,
+      content: string,
+      args: Array<{ key: string, value: string }>,
+      comment: string
+    }
+      = {
+      command: '',
+      content: '',
+      args: [],
+      comment: ''
+    }
+    for (const part of line.value) {
+      switch (part.type) {
+        case "command": parsedLine.command = part.value;
+          break;
+        case "content": parsedLine.content = part.value;
+          break;
+        case "arg": parsedLine.args.push({ key: part.key, value: part.value })
+          break;
+        case "comment": parsedLine.comment = part.value
+      }
+    }
+    return parsedLine;
+  })
+  return parsedLines;
 }
 
 SCRIPT.setPattern(
   apply(list_sc(LINE, alt(tok(TokenKind.LF), tok(TokenKind.CRLF))), applySctipt)
 );
 
-const script = `WebGAL:Hello, I'm WebGAL's next generation parser. -arg1 -arg2=2 -arg3=true -arg4=Hello!;This is the comment.
+const script = `Paeser:Hello, I'm WebGAL's next generation parser. -arg1 -arg2=2 -arg3=true -arg4=Hello!;This is the comment.
 ;This is the comment
 This is the dialog
-This is the dialog with args -arg1 -arg2=true
+This is the dialog with args -arg1 -arg2=true;
 This is the dialog with comments;comments are here
-WebGAL: -arg arg1=true`
+Parser: -arg -arg1=true
+:This is the dialog without speaker`
 
-const result = expectEOF(SCRIPT.parse(lexer.parse(script)))
-console.log(result);
+const result = expectEOF(SCRIPT.parse(lexer.parse(script))) //@ts-ignore
+const output = result?.candidates?.[0]?.result;
+console.log(output);
 
