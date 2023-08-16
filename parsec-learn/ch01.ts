@@ -28,7 +28,7 @@ const lexer = buildLexer([
   [true, /^\;/g, TokenKind.SemiColon], // 分号模式
   [true, /^\n/g, TokenKind.LF], // 等号模式
   [true, /^\r\n/g, TokenKind.CRLF], // 分号模式
-  [true,/^ -/g,TokenKind.ARGST]
+  [true, /^ -/g, TokenKind.ARGST]
 ]);
 
 const CONTENT = rule();
@@ -41,6 +41,7 @@ const COMMENT = rule();
 const LINE = rule();
 const SCRIPT = rule();
 const ARG_START = rule();
+const DIALOGUE = rule();
 
 ARGK.setPattern(
   tok(TokenKind.Identifier)
@@ -102,7 +103,7 @@ function applyColon(value) {
 function applyContent(value) {
   const words = value;
   const validWords = words.filter(e => e?.type === 'word')
-  const validValue = validWords.map(e=>e.value).reduce((prev, curr) => prev +' '+ curr, '').trim()
+  const validValue = validWords.map(e => e.value).reduce((prev, curr) => prev + ' ' + curr, '').trim()
   return { type: 'content', value: validValue }
 }
 
@@ -110,37 +111,69 @@ function applyWord(value) {
   return { type: 'word', value: value.text }
 }
 
+
 CONTENT.setPattern(
-  list_sc(apply(tok(TokenKind.Identifier), applyWord), tok(TokenKind.Space)))
+  apply(list_sc(apply(tok(TokenKind.Identifier), applyWord), tok(TokenKind.Space)), applyContent)
+)
 
 function applyCtrl(value) {
   const parts = flattenDeep(value).filter(e => e?.type);
   return parts
 }
 
+
+DIALOGUE.setPattern(
+  seq(
+    opt(CONTENT),
+    opt(ARGS),
+    opt(COMMENT)
+  )
+)
+
 CTRL.setPattern(
   apply(seq(
     apply(opt(apply(tok(TokenKind.Identifier), applyCommand)), applyCommand),
     apply(tok(TokenKind.Colon), applyColon),
-    opt(apply(CONTENT, applyContent)),
+    opt(CONTENT),
     opt(ARGS),
     opt(COMMENT)
   ), applyCtrl)
 )
 
+function applyCommentContent(value) {
+  if (!value) return undefined;
+  if (value?.type === 'content') return { type: 'comment', value: value.value };
+}
+
+function applyComment(value) {
+  if (!value) return undefined
+  return value.filter(e => e?.type === 'comment');
+}
+
 COMMENT.setPattern(
-  seq(tok(TokenKind.SemiColon), opt(CONTENT))
+  apply(
+    seq(
+      tok(TokenKind.SemiColon),
+      apply(opt(CONTENT), applyCommentContent)
+    ), applyComment)
 )
 
 function applyLn(value) {
-  const parts = flattenDeep(value).filter(e => e?.type);
-  if (!parts.find(e => e.type === 'command')) return undefined
-  return { type: 'line', value: parts }
+  if (Array.isArray(value)) {
+    const parts = flattenDeep(value).
+      filter(e => e?.type);
+    if (!parts.find(e => e.type === 'command' || e.type === 'comment' || e.type === 'content')) return undefined
+    return { type: 'line', value: parts }
+  } else {
+    if (value?.type === 'command' || value?.type === 'comment' || value?.type === 'content') {
+      return { type: 'line', value: [value] }
+    }
+  }
 }
 
 LINE.setPattern(
   apply(alt(
-    COMMENT, CTRL, CONTENT
+    COMMENT, CTRL, DIALOGUE
   ), applyLn)
 )
 
@@ -152,9 +185,12 @@ SCRIPT.setPattern(
   apply(list_sc(LINE, alt(tok(TokenKind.LF), tok(TokenKind.CRLF))), applySctipt)
 );
 
-const script = `WebGAL:Hello, I'm WebGAL's next generation parser. -arg1 -arg2=2 -arg3=true -arg4=Hello!;comment
-command:content1 -arg1=1 -arg2=2 -arg3=true -arg4;comment
-command:content2 -arg1=1 -arg2=2 -arg3=true -arg4;comment`
+const script = `WebGAL:Hello, I'm WebGAL's next generation parser. -arg1 -arg2=2 -arg3=true -arg4=Hello!;This is the comment.
+;This is the comment
+This is the dialog
+This is the dialog with args -arg1 -arg2=true
+This is the dialog with comments;comments are here
+WebGAL: -arg arg1=true`
 
 const result = expectEOF(SCRIPT.parse(lexer.parse(script)))
 console.log(result);
