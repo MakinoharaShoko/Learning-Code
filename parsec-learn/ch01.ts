@@ -2,6 +2,7 @@
 import { Token, buildLexer, expectEOF, expectSingleResult, list_sc, lrec_sc, rep, rule, tok } from 'typescript-parsec';
 import { alt, apply, kmid, opt, seq, str } from 'typescript-parsec';
 import { flattenDeep } from 'lodash'
+import fs from 'fs/promises'
 
 enum TokenKind {
   Space,
@@ -18,8 +19,8 @@ enum TokenKind {
 }
 
 const lexer = buildLexer([
-  [true, /^[ ]+/g, TokenKind.Space],
-  [true, /^\-/g, TokenKind.Dash],
+  [true, /^[ ]+/g, TokenKind.Space], // 空格
+  [true, /^\-/g, TokenKind.Dash], // 连字符
   [true, /^\d+/g, TokenKind.Number], // 数字模式
   [true, /^true|false/g, TokenKind.Boolean], // 布尔值模式
   [true, /^[^:;\s =]+/g, TokenKind.Identifier], // 标识符模式
@@ -28,7 +29,7 @@ const lexer = buildLexer([
   [true, /^\;/g, TokenKind.SemiColon], // 分号模式
   [true, /^\n/g, TokenKind.LF], // 等号模式
   [true, /^\r\n/g, TokenKind.CRLF], // 分号模式
-  [true, /^ -/g, TokenKind.ARGST]
+  [true, /^ -/g, TokenKind.ARGST], // 参数分隔符
 ]);
 
 const CONTENT = rule();
@@ -212,15 +213,13 @@ SCRIPT.setPattern(
   apply(list_sc(LINE, alt(tok(TokenKind.LF), tok(TokenKind.CRLF))), applySctipt)
 );
 
-const script = `Paeser:Hello, I'm WebGAL's next generation parser. -arg1 -arg2=2 -arg3=true -arg4=Hello!;This is the comment.
-;This is the comment
-This is the dialog
-This is the dialog with args -arg1 -arg2=true;
-This is the dialog with comments;comments are here
-Parser: -arg -arg1=true
-:This is the dialog without speaker`
 
-const result = expectEOF(SCRIPT.parse(lexer.parse(script))) //@ts-ignore
-const output = result?.candidates?.[0]?.result;
-console.log(output);
+
+fs.readFile('ch01.txt').then(r => {
+  const script = r.toString()
+  const result = expectEOF(SCRIPT.parse(lexer.parse(script))) //@ts-ignore
+  const output = result?.candidates?.[0]?.result;
+  console.log(output);
+})
+
 

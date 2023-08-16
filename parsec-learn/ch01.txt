@@ -1,0 +1,7 @@
+Paeser:Hello, I'm WebGAL's next generation parser. -arg1 -arg2=2 -arg3=true -arg4=Hello!;This is the comment.
+;This is the comment
+This is the dialog
+This is the dialog with args -arg1 -arg2=true;
+This is the dialog with comments;comments are here
+Parser: -arg -arg1=true
+:This is the dialog without speaker
