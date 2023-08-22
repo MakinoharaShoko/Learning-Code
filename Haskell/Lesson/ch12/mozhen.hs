@@ -8,5 +8,5 @@ a = Just 3 :: Maybe Int
 main = do
   let f = Just (\x -> Just (x + 1))
   let
-  let result = f >>= (a >>=) :: Maybe Int
+  let result = (a >>=) =<< f :: Maybe Int
   print result
