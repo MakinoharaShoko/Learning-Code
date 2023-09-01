@@ -1,12 +1,26 @@
+import { useValueWithKey } from 'react-usevalue-hook';
 import './App.css'
-import {AnimationTest} from './pages/animationtest/AnimationTest'
-import WaterFall from "./pages/waterfallTest/WaterFall";
+function Comp1() {
+  const value1 = useValueWithKey(1, 'global1')
+
+  return <div onClick={() => { value1.value = value1.value + 1 }}>
+    {value1.value} Click to +1
+  </div>
+}
+
+function Comp2() {
+  const value2 = useValueWithKey(1, 'global1')
+
+  return <div onClick={() => { value2.value = value2.value + 1 }}>
+    {value2.value} Click to +1
+  </div>
+}
 
 function App() {
-  const list = [200, 300, 500, 100, 250, 300, 200, 700];
   return (
-    <div className="App">
-      <WaterFall list={list}/>
+    <div style={{padding:20}}>
+      <div><Comp1 /></div>
+      <div><Comp2 /></div>
     </div>
   )
 }
