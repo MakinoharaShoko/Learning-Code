@@ -854,10 +854,10 @@ react-refresh@^0.13.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.13.0.tgz#cbd01a4482a177a5da8d44c9755ebb1f26d5a1c1"
   integrity sha512-XP8A9BT0CpRBD+NYLLeIhld/RqG9+gktUjW1FkE+Vm7OCinbG1SshcK5tb9ls4kzvjZr9mOQc7HYgBngEyPAXg==
 
-react-usevalue-hook@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-usevalue-hook/-/react-usevalue-hook-1.0.6.tgz#eb8615b5f5b7374dd931cf936a7955900dc2012e"
-  integrity sha512-jZiwYSsRYq5YyvoxvyPNgUsg7XHHVtX1c57G9EXxr5DWxLe758zheHHimK6rYsVjGi8iJhQvde7Z7JwbZ3x6Vg==
+react-usevalue-hook@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-usevalue-hook/-/react-usevalue-hook-1.0.9.tgz#72ccff37d1761ad1ae1babfd9b22f14b89b5ac5d"
+  integrity sha512-E2HY+J4O1v5azOTfwgkW0YFNLD2R+7E9ASFdcFoOIaCCuA0ZaG+vL5VytIfITkWCF8KFQ813k39VTjlVVsYoTw==
   dependencies:
     mitt "^3.0.1"
     react "^18.2.0"

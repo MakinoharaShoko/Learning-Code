@@ -9,7 +9,7 @@ function Comp1() {
 }
 
 function Comp2() {
-  const value2 = useValueWithKey(1, 'global1')
+  const value2 = useValueWithKey(2, 'global1')
 
   return <div onClick={() => { value2.value = value2.value + 1 }}>
     {value2.value} Click to +1
