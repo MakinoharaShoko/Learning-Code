@@ -7,13 +7,13 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-
 const axios = require('axios');
+const { Router } = require('itty-router');
 
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace;
-	main: KVNamespace;
+	devc: KVNamespace;
 	//
 	// Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
 	// MY_DURABLE_OBJECT: DurableObjectNamespace;
@@ -27,37 +27,31 @@ export interface Env {
 	DB: D1Database
 }
 
+const router = Router();
+
+router
+	.get('/', () => new Response('Hello, devc!'))
+	.get('/user/:id', (req: any) => Response.json({
+		user_id: req.params.id,
+		error: 0
+	}))
+	.post('/submit', () => new Response('Form submitted'));
+
 export default {
 	async fetch(
 		request: Request,
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
-		if (request.url.match('openai')) {
-			const apiKey = await env.main.get('api-key') ?? '';
-			let text = await request.text();
-			const text2 = request.url.split('/').pop();
-			if (text2 !== 'openai') {
-				text = text + text2;
-			}
-			const result = await fetch('https://api.openai.com/v1/chat/completions', {
-				method: 'POST',
-				body: JSON.stringify({
-					"model": "gpt-3.5-turbo",
-					"messages": [{ "role": "user", "content": text }]
-				})
-				, headers: {
-					Authorization: `Bearer ${apiKey}`,
-					'Content-Type': 'application/json'
-				}
-			})
-			const resultJSON: any = await result.json();
-			const resultText = resultJSON.choices[0].message.content;
-			return new Response(resultText);
+		ctx.passThroughOnException();
+		try {
+			// Handle request using router
+			return await router.handle(request).catch(() => new Response('Route not found', { status: 500 }));
+		} catch (e) {
+			// Log the error for debugging
+			console.error(e);
+			// Return a 500 Internal Server Error response
+			return new Response('Internal Server Error', { status: 500 });
 		}
-		else {
-			return new Response("Hello World!");
-		}
-
 	},
 };
