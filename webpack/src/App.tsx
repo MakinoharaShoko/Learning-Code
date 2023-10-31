@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
+import { logOne } from "./funcs";
+import s from './app.module.scss';
 
 export function App() {
   useEffect(() => {
     initialScript();
   }, []);
-  return <div>Hello, Webpack + React!</div>;
+  return <div className={s.t} onClick={logOne}>Hello, Webpack + React!</div>;
 }
 
 function initialScript() {

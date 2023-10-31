@@ -1,13 +1,22 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    // "rootDir": "./src",
-    "sourceMap": true, // 开启sourcemap
-    "module": "commonjs",
+    "sourceMap": true,
+    "module": "ESNext",
     "target": "es5",
     "jsx": "react",
     "esModuleInterop": true,
-    "allowJs": false,
-    "strict": true
-  }
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*", "typings.d.ts"],
+  "exclude": ["node_modules"]
 }

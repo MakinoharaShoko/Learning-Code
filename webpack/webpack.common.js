@@ -16,31 +16,56 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         filename: `assets/[name].${bundle_random_str}.bundle.js`,
     },
+    target:"web",
     // 对于各个模块的规则
     module: {
         rules: [
-            // JavaScript
             {
-                test: /\.m?js$/,
+                test: /\.(m?js|tsx?)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
+                    loader: 'swc-loader',
                 },
             },
             // css
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            },
-            // ts
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
+                exclude: /\.module\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+              },
+              // Module CSS
+              {
+                test: /\.module\.css$/,
+                use: [
+                  MiniCssExtractPlugin.loader,
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true,
+                    },
+                  },
+                ],
+              },
+              // Regular SCSS
+              {
+                test: /\.scss$/,
+                exclude: /\.module\.scss$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+              },
+              // Module SCSS
+              {
+                test: /\.module\.scss$/,
+                use: [
+                  MiniCssExtractPlugin.loader,
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true,
+                    },
+                  },
+                  'sass-loader',
+                ],
+              },
         ]
     },
     plugins: [
