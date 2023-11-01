@@ -8,3 +8,5 @@
 *.mp3
 *.wav
 *.txt
+build.js
+builder.ts
