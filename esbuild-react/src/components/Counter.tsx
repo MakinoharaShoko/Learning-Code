@@ -9,7 +9,7 @@ export default function Counter() {
         setCount((count) => count + 1);
       }}
     >
-      Value is {count},Click to +1;
+      Value is {count}, Click to +1;
     </div>
   );
 }
