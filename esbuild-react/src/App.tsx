@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './app.module.scss';
-import Counter from '@/components/Counter';
+import Counter from './components/Counter';
 
 export default function App() {
   return (
