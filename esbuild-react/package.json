@@ -5,8 +5,8 @@
   "author": "awran5",
   "license": "MIT",
   "scripts": {
-    "start": "tsx builder.ts --watch",
-    "build": "tsx builder.ts",
+    "start": "node build.js --watch",
+    "build": "node build.js",
     "lint": "eslint src/** --fix"
   },
   "dependencies": {
