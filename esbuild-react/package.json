@@ -5,11 +5,9 @@
   "author": "awran5",
   "license": "MIT",
   "scripts": {
-    "pre-commit": "lint-staged",
-    "lint": "eslint \"src/**/*.{ts,tsx}\" --max-warnings=0",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "start": "tsx builder.ts --watch",
-    "build": "tsx builder.ts"
+    "build": "tsx builder.ts",
+    "lint": "eslint src/** --fix"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -30,34 +28,19 @@
     "esbuild-css-modules-plugin": "^2.6.2",
     "esbuild-sass-plugin": "^2.4.0",
     "esbuild-scss-modules-plugin": "^1.1.1",
-    "eslint": "^8.26.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "fs-extra": "^10.1.0",
-    "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "live-server": "^1.2.2",
     "postcss": "^8.4.18",
     "postcss-modules": "^6.0.0",
     "postcss-preset-env": "^7.8.2",
-    "prettier": "^2.7.1",
     "tsx": "^3.14.0",
-    "typescript": "^4.8.4"
-  },
-  "lint-staged": {
-    "*.+(ts|tsx)": "eslint --fix",
-    "*.+(json|css|md)": "prettier --write"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "overrides": {
-    "chokidar": "^3.5.3"
+    "typescript": "^4.8.4",
+    "eslint": "^8.13.0",
+    "eslint-config-alloy": "^4.5.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.29.4",
+    "prettier": "^2.6.2"
   }
 }

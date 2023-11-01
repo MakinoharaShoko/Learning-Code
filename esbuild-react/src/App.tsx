@@ -1,6 +1,11 @@
-import React from "react";
+import React from 'react';
 import s from './app.module.scss';
 
 export default function App() {
-  return <div className={s.blue}>Hello World!</div>;
+  return (
+    <main>
+      <p className={s.blue}>Hello World!</p>
+      <p>This is a React Esbuild template!</p>
+    </main>
+  );
 }

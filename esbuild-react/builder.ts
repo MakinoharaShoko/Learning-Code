@@ -4,11 +4,6 @@ import { build, BuildOptions } from "esbuild";
 import cssModulesPlugin from "esbuild-css-modules-plugin";
 import { removeSync, copySync } from "fs-extra";
 import { sassPlugin, postcssModules } from "esbuild-sass-plugin";
-
-import postcss from "postcss";
-import autoprefixer from "autoprefixer";
-import postcssPresetEnv from "postcss-preset-env";
-
 const isWatch = process.argv.includes("--watch");
 
 /**
