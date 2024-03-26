@@ -5,11 +5,13 @@
   "license": "MIT",
   "scripts": {
     "ch01": "tsx ch01.ts",
-    "ch02": "tsx ch02.ts"
+    "ch02": "tsx ch02.ts",
+    "ch03": "tsx ch03.ts"
   },
   "dependencies": {
     "@types/node": "^20.5.0",
     "lodash": "^4.17.21",
+    "scss-parser": "^1.0.6",
     "tsx": "^3.12.7",
     "typescript-parsec": "^0.3.4",
     "webgal-parser": "^4.4.3"
