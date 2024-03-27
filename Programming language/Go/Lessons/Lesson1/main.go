@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"mymath"
 )
 
 func printtab() {
@@ -21,8 +20,6 @@ func printtab() {
 		}
 
 	}
-
-	fmt.Println(mymath.Sum(1, 2))
 }
 
 func main() {
