@@ -1,7 +1,7 @@
 go 1.18
 
 use (
-	./mymath
-	./run
-	./tour
+	./Lesson1
+	./Lesson2
+	./Tour
 )
