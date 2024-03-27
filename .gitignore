@@ -7,16 +7,16 @@ node_modules
 **/.DS_Store
 
 # Go 语言忽略项
-/bin/
-/pkg/
+bin/
+pkg/
 
 # Rust 语言忽略项
-/target/
+target/
 
 # F# 和 .NET 通用忽略项
 ## 二进制和中间产物
-/bin/
-/obj/
+bin/
+obj/
 
 ## 可能的用户特定文件 和 IDE 设置文件
 *.user
@@ -31,5 +31,5 @@ project.fragment.lock.json
 artifacts/
 
 ## 包含在 .NET Core 项目中的 NuGet 产物
-**/[Pp]ackages/
+[Pp]ackages/
 *.nupkg
